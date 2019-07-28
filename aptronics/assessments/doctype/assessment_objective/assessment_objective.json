@@ -31,25 +31,13 @@
    "label": "Point Allocation"
   }
  ],
- "modified": "2019-07-28 19:07:50.242706",
+ "istable": 1,
+ "modified": "2019-07-28 19:32:39.240780",
  "modified_by": "Administrator",
  "module": "Assessments",
  "name": "Assessment Objective",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
+ "permissions": [],
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
