@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include aptronics *.css
+recursive-include aptronics *.csv
+recursive-include aptronics *.html
+recursive-include aptronics *.ico
+recursive-include aptronics *.js
+recursive-include aptronics *.json
+recursive-include aptronics *.md
+recursive-include aptronics *.png
+recursive-include aptronics *.py
+recursive-include aptronics *.svg
+recursive-include aptronics *.txt
+recursive-exclude aptronics *.pyc
