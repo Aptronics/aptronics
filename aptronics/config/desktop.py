@@ -5,7 +5,9 @@ from frappe import _
 def get_data():
 	return [
 		{
-			"module_name": "Aptronics Applications",
+			"module_name": "Aptronics",
+			"category": "Modules",
+			"label": _("Aptronics"),
 			"color": "grey",
 			"icon": "octicon octicon-file-directory",
 			"type": "module",
