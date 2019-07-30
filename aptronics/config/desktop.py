@@ -9,8 +9,9 @@ def get_data():
 			"category": "Modules",
 			"label": _("Aptronics"),
 			"color": "grey",
-			"icon": "octicon octicon-file-directory",
+			"icon": "fa fa-cubes",
 			"type": "module",
-			"label": _("Aptronics Applications")
+			"label": _("Aptronics"),
+			"description": "Aptronics tool and appplications."
 		}
 	]
