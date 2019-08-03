@@ -85,9 +85,9 @@ doc_events = {
 # 		"on_cancel": "method",
 #		"on_trash": "method"
 	},
-    "Sales Invoice Item": {
- 		"validate": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
- 	}
+ #   "Sales Invoice Item": {
+ #		"validate": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
+ #	}
  }
 
 # Scheduled Tasks
