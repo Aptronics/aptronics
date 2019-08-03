@@ -13,7 +13,7 @@ def get_actual_cost_by_batch(doc, method):
         incoming_rate = frappe.db.sql("""select incoming_rate
 			from `tabStock Ledger Entry`
 			where batch_no = %s and item_code = %s""", (i.batch_no, i.item_code))
-        i.actual_cost = actual_cost + frappe.utils.flt(incoming_rate[0][0])*i.qty
+        i.actual_cost = frappe.utils.flt(incoming_rate[0][0])
         total_actual_cost = total_actual_cost + (i.actual_cost*i.qty)
 
         i.gross_profit = i.amount - (i.actual_cost*i.qty)
@@ -21,4 +21,3 @@ def get_actual_cost_by_batch(doc, method):
 
     doc.total_actual_cost = total_actual_cost
     doc.total_gross_profit = total_gross_profit
-    
