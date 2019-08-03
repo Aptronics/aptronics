@@ -85,9 +85,9 @@ doc_events = {
 # 		"on_cancel": "method",
 #		"on_trash": "method"
 	},
-    "Sales Invoice Item": {
- 		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch_on_item",
- 	}
+#    "Sales Invoice Item": {
+# 		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch_on_item",
+# 	}
  }
 
 # Scheduled Tasks
