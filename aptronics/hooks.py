@@ -80,11 +80,14 @@ app_license = "MIT"
 # Hook on document methods and events
 
 doc_events = {
- 	"*": {
- 		"on_update": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
+ 	"Sales Invoice": {
+ 		"validate": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
 # 		"on_cancel": "method",
 #		"on_trash": "method"
-	}
+	},
+    "Sales Invoice Item": {
+ 		"validate": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
+ 	}
  }
 
 # Scheduled Tasks
