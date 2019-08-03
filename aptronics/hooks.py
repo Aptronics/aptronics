@@ -81,7 +81,7 @@ app_license = "MIT"
 
 doc_events = {
  	"Sales Invoice": {
- 		"validate": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
+ 		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
 # 		"on_cancel": "method",
 #		"on_trash": "method"
 	},
