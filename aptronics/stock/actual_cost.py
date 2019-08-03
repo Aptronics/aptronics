@@ -5,7 +5,7 @@ import frappe
 @frappe.whitelist()
 def get_actual_cost_by_batch(doc, method):
     #data = str(doc.as_dict())
-    #frappe.logger().info(doc.total_actual_cost)
+    frappe.logger().info(doc.total_actual_cost)
     #frappe.logger().info(method)
     total_actual_cost = 0
     total_gross_profit = 0
@@ -18,7 +18,7 @@ def get_actual_cost_by_batch(doc, method):
 
 def get_actual_cost_by_batch_on_item(doc, method):
     #data = str(doc.as_dict())
-    #frappe.logger().info(doc.total_actual_cost)
+    frappe.logger().info(doc.actual_cost)
     #frappe.logger().info(method)
     actual_cost = 0
     frappe.logger().info(doc.batch_no)
@@ -26,6 +26,8 @@ def get_actual_cost_by_batch_on_item(doc, method):
 			from `tabStock Ledger Entry`
 			where batch_no = %s and item_code = %s""", (doc.batch_no, doc.item_code))
     actual_cost = actual_cost + frappe.utils.flt(incoming_rate[0][0])*doc.qty
+    
+    frappe.logger().info(actual_cost)
 
     doc.actual_cost = actual_cost
     doc.gross_profit = doc.amount - (doc.actual_cost*doc.qty)
