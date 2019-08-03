@@ -16,7 +16,7 @@ def get_actual_cost_by_batch(doc, method):
     doc.total_actual_cost = total_actual_cost
     doc.total_gross_profit = total_gross_profit
 
-def get_actual_cost_by_batch_on_item(doc, method):
+def (doc, method):
     data = str(doc.as_dict())
     #frappe.logger().info(doc.total_actual_cost)
     #frappe.logger().info(method)
