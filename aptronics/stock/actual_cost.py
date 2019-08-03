@@ -25,7 +25,7 @@ def (doc, method):
     incoming_rate = frappe.db.sql("""select incoming_rate
 			from `tabStock Ledger Entry`
 			where batch_no = %s and item_code = %s""", (doc.batch_no, doc.item_code))
-    actual_cost = actual_cost + frappe.utils.flt(incoming_rate[0][0])*i.qty
+    actual_cost = actual_cost + frappe.utils.flt(incoming_rate[0][0])*doc.qty
 
     doc.actual_cost = actual_cost
     doc.gross_profit = doc.amount - (doc.actual_cost*doc.qty)
