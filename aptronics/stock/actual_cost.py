@@ -8,5 +8,5 @@ def get_actual_cost_by_batch(doc, method):
     frappe.logger().info(doc.total_actual_cost)
     frappe.logger().info(method)
     for i in doc.items:
-        frappe.logger().info(.description)
+        frappe.logger().info(i.batch_no)
     
