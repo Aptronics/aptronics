@@ -24,6 +24,8 @@ def get_actual_cost_by_batch(doc, method):
 
 def accrue_shipment_cost(doc, method):
     frappe.logger().info(doc)
+    for i in doc.items:
+        i.batch_no
 
 def reversal_shipment_cost_on_shipment(doc,method):
     frappe.logger().info(doc)
