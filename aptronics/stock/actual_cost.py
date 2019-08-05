@@ -28,7 +28,18 @@ def accrue_shipment_cost(doc, method):
         sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
         frappe.logger().info(sle.valuation_rate*sle.actual_qty*-1)
         gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
-        frappe.logger().info(gle.name)
+        try:
+            gle_rev = frappe.db.sql("""select name
+			from `tabGL Entry`
+			where voucher_no = %s and 
+            account = %s and remarks = %s""", (doc.name,i.expense_account,i.name), as_dict=True)
+        except:
+            gle_rev = frappe.new_doc("GL Entry")
+        if gle_rev != {}:
+            frappe.logger().info(gle_rev.name)
+        else:
+            frappe.logger().info("New GL Entry for line: " + i.name)
+        frappe.logger().info(gle_rev)
 
 
 def reversal_shipment_cost_on_shipment(doc,method):
