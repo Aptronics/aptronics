@@ -21,3 +21,9 @@ def get_actual_cost_by_batch(doc, method):
 
     doc.total_actual_cost = total_actual_cost
     doc.total_gross_profit = total_gross_profit
+
+def accrue_shipment_cost(doc, method):
+    frappe.logger().info(doc)
+
+def reversal_shipment_cost_on_invoice(doc,method):
+    frappe.logger().info(doc)
