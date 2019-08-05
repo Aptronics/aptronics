@@ -88,7 +88,7 @@ doc_events = {
     "GL Entry": {
  		"after_insert": "aptronics.stock.actual_cost.accrue_shipment_cost",
 		"on_trash": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
- 	#}
+ 	}
  }
 
 # Scheduled Tasks
