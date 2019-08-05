@@ -82,12 +82,12 @@ app_license = "MIT"
 doc_events = {
  	"Sales Invoice": {
  		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
-# 		"on_cancel": "method",
+ 		"on_submit": "aptronics.stock.actual_cost.reversal_shipment_cost_on_invoice",
 #		"on_trash": "method"
 	},
-#    "Sales Invoice Item": {
-# 		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch_on_item",
-# 	}
+    "Delivery Note": {
+ 		"on_submit": "aptronics.stock.actual_cost.accrue_shipment_cost",
+ 	}
  }
 
 # Scheduled Tasks

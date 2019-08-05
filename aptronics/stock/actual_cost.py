@@ -4,7 +4,7 @@ import frappe
 @frappe.whitelist()
 def get_actual_cost_by_batch(doc, method):
     # data = str(doc.as_dict())
-    frappe.logger().info(doc.total_actual_cost)
+    #frappe.logger().info(doc.total_actual_cost)
     # frappe.logger().info(method)
     total_actual_cost = 0
     total_gross_profit = 0
