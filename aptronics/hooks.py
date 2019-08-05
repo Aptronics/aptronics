@@ -86,8 +86,8 @@ doc_events = {
 	#	"on_cancel": "aptronics.stock.actual_cost.reversal_shipment_cost_on_invoice_reversal",
 	},
     "GL Entry": {
- 		"on_submit": "aptronics.stock.actual_cost.accrue_shipment_cost",
-		"on_cancel": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
+ 		"before_insert": "aptronics.stock.actual_cost.accrue_shipment_cost",
+		"before_delete": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
  	}
  }
 
