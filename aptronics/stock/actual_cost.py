@@ -24,6 +24,11 @@ def get_actual_cost_by_batch(doc, method):
 
 def accrue_shipment_cost(doc, method):
     frappe.logger().info(method + " : " + doc.doctype)
+    for i in doc.items:
+        sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
+        frappe.logger().info(sle.valuation_rate*sle.qty*-1)
+
+
 
 def reversal_shipment_cost_on_shipment(doc,method):
     frappe.logger().info(method + " : " + doc.doctype)
