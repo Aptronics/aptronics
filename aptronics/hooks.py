@@ -85,10 +85,10 @@ doc_events = {
  	#	"on_submit": "aptronics.stock.actual_cost.reversal_shipment_cost_on_invoice",
 	#	"on_cancel": "aptronics.stock.actual_cost.reversal_shipment_cost_on_invoice_reversal",
 	},
-    "GL Entry": {
- 		"before_insert": "aptronics.stock.actual_cost.accrue_shipment_cost",
-		"before_delete": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
- 	}
+    #"Delivery Note": {
+ 	#	"on_submit": "aptronics.stock.actual_cost.accrue_shipment_cost",
+	#	"before_delete": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
+ 	#}
  }
 
 # Scheduled Tasks
