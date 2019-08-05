@@ -83,10 +83,11 @@ doc_events = {
  	"Sales Invoice": {
  		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
  		"on_submit": "aptronics.stock.actual_cost.reversal_shipment_cost_on_invoice",
-#		"on_trash": "method"
+		"on_cancel": "aptronics.stock.actual_cost.reversal_shipment_cost_on_invoice_reversal",
 	},
     "Delivery Note": {
  		"on_submit": "aptronics.stock.actual_cost.accrue_shipment_cost",
+		"on_cancel": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
  	}
  }
 
