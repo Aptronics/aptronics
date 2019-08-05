@@ -28,8 +28,3 @@ def accrue_shipment_cost(doc, method):
 def reversal_shipment_cost_on_shipment(doc,method):
     frappe.logger().info(doc)
 
-def reversal_shipment_cost_on_invoice(doc,method):
-    frappe.logger().info(doc)
-
-def reversal_shipment_cost_on_invoice_reversal(doc,method):
-    frappe.logger().info(doc)
