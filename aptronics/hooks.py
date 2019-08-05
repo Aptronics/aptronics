@@ -88,7 +88,7 @@ doc_events = {
     "Delivery Note": {
  		"on_submit": "aptronics.stock.actual_cost.accrue_shipment_cost",
 		"on_cancel": "aptronics.stock.actual_cost.reversal_shipment_cost_on_shipment",
- 	#}
+ 	}
  }
 
 # Scheduled Tasks
