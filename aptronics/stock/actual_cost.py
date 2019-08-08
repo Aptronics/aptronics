@@ -30,10 +30,12 @@ def accrue_shipment_cost(doc, method):
     for i in doc.items:
         sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
         line_total = abs(sle.valuation_rate*sle.actual_qty)
-        gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
-
-        frappe.db.sql("""delete from `tabGL Entry`
-                    where name = %s""", (gle.name))
+        try:
+            gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
+            frappe.db.sql("""delete from `tabGL Entry`
+                        where name = %s""", (gle.name))
+        except:
+            pass
 
         try:
             gle_rev_cost = frappe.db.sql("""select name
