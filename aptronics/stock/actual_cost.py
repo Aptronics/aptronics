@@ -44,16 +44,16 @@ def accrue_shipment_cost(doc, method):
             #else:
             if sle.actual_qty < 0:
                 gle_rev_cost = frappe.new_doc("GL Entry")
-                gle_rev_cost.voucher_type = gle.voucher_type
-                gle_rev_cost.to_rename = gle.to_rename
-                gle_rev_cost.cost_center = gle.cost_center
-                gle_rev_cost.voucher_no = gle.voucher_no
-                gle_rev_cost.company = gle.company
-                gle_rev_cost.is_advance = gle.is_advance
-                gle_rev_cost.docstatus = gle.docstatus
+                gle_rev_cost.voucher_type = gle[0].voucher_type
+                gle_rev_cost.to_rename = gle[0].to_rename
+                gle_rev_cost.cost_center = gle[0].cost_center
+                gle_rev_cost.voucher_no = gle[0].voucher_no
+                gle_rev_cost.company = gle[0].company
+                gle_rev_cost.is_advance = gle[0].is_advance
+                gle_rev_cost.docstatus = gle[0].docstatus
                 gle_rev_cost.remarks = i.name
                 gle_rev_cost.is_opening = "No"
-                gle_rev_cost.posting_date = gle.posting_date
+                gle_rev_cost.posting_date = gle[0].posting_date
                 gle_rev_cost.account_currency = gle.account_currency
                 gle_rev_cost.account = "Shipped Not Invoiced - APT"
                 gle_rev_cost.debit = line_total
@@ -105,17 +105,17 @@ def accrue_shipment_cost(doc, method):
                 # gle_rev_cost.insert()
 
                 gle_rev_cost = frappe.new_doc("GL Entry")
-                gle_rev_cost.voucher_type = gle.voucher_type
-                gle_rev_cost.to_rename = gle.to_rename
-                gle_rev_cost.cost_center = gle.cost_center
-                gle_rev_cost.voucher_no = gle.voucher_no
-                gle_rev_cost.company = gle.company
-                gle_rev_cost.is_advance = gle.is_advance
-                gle_rev_cost.docstatus = gle.docstatus
+                gle_rev_cost.voucher_type = gle[0].voucher_type
+                gle_rev_cost.to_rename = gle[0].to_rename
+                gle_rev_cost.cost_center = gle[0].cost_center
+                gle_rev_cost.voucher_no = gle[0].voucher_no
+                gle_rev_cost.company = gle[0].company
+                gle_rev_cost.is_advance = gle[0].is_advance
+                gle_rev_cost.docstatus = gle[0].docstatus
                 gle_rev_cost.remarks = i.name
                 gle_rev_cost.is_opening = "No"
-                gle_rev_cost.posting_date = gle.posting_date
-                gle_rev_cost.account_currency = gle.account_currency
+                gle_rev_cost.posting_date = gle[0].posting_date
+                gle_rev_cost.account_currency = gle[0].account_currency
                 gle_rev_cost.account = "Shipped Not Invoiced - APT"
                 gle_rev_cost.debit = 0
                 gle_rev_cost.debit_in_account_currency = 0
@@ -129,7 +129,7 @@ def accrue_shipment_cost(doc, method):
     try:
         if gle:
             frappe.db.sql("""delete from `tabGL Entry`
-                        where name = %s""", (gle.name))
+                        where name = %s""", (gle[0].name))
     except:
         frappe.logger().info(sys.exc_info()[0])
 
