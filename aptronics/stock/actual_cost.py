@@ -25,13 +25,14 @@ def get_actual_cost_by_batch(doc, method):
     doc.total_actual_cost = total_actual_cost
     doc.total_gross_profit = total_gross_profit
 
-def accrue_shipment_cost(doc, method):
+def shipped_not_invoiced(doc, method):
     frappe.logger().info(method + " : " + doc.doctype)
+    gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
+    stock_line = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
+
     for i in doc.items:
         sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
         line_total = abs(sle.valuation_rate*sle.actual_qty)
-        gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
-
         try:
             gle_rev_cost = frappe.db.sql("""select name
             from `tabGL Entry`
@@ -133,6 +134,6 @@ def accrue_shipment_cost(doc, method):
         frappe.logger().info(sys.exc_info()[0])
 
 
-def reversal_shipment_cost_on_shipment(doc,method):
+def reversal_shipment_not_invoiced(doc,method):
     frappe.logger().info(method + " : " + doc.doctype)
 
