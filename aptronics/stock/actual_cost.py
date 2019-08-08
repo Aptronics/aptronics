@@ -37,6 +37,7 @@ def accrue_shipment_cost(doc, method):
             where voucher_no = %s and 
             account = %s""", (doc.name,i.expense_account), as_dict=True)
             #account = %s and remarks = %s""", (doc.name,i.expense_account,i.name), as_dict=True)
+            frappe.logger().info(gle_rev_cost.name)
             if gle_rev_cost != []:
                 frappe.logger().info(gle_rev_cost.name)
             #else:
