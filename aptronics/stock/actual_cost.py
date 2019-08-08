@@ -1,4 +1,7 @@
 from __future__ import unicode_literals
+
+import sys
+
 import frappe
 
 @frappe.whitelist()
@@ -120,7 +123,7 @@ def accrue_shipment_cost(doc, method):
                 gle_rev_cost.insert()
 
         except:
-            frappe.logger().info("New GL Entry for line: " + i.name)
+            frappe.logger().info(sys.exc_info()[0])
 
 
 
