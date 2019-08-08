@@ -84,9 +84,9 @@ doc_events = {
  		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
  #		"on_submit": "aptronics.stock.actual_cost.reversal_shipment_not_invoiced",
 	},
- #  "Delivery Note": {
- #		"on_submit": "aptronics.stock.actual_cost.shipped_not_invoiced",
-#	}
+  "Delivery Note": {
+		"on_submit": "aptronics.stock.actual_cost.shipped_not_invoiced",
+	}
  }
 
 # Scheduled Tasks

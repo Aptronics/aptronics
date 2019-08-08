@@ -27,102 +27,109 @@ def get_actual_cost_by_batch(doc, method):
 
 def shipped_not_invoiced(doc, method):
     frappe.logger().info(method + " : " + doc.doctype)
-    gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
-    stock_line = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
 
     for i in doc.items:
-        sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
-        line_total = abs(sle.valuation_rate*sle.actual_qty)
         try:
-            gle_rev_cost = frappe.db.sql("""select name
-            from `tabGL Entry`
-            where voucher_no = %s and 
-            account = %s and remarks = %s""", (doc.name,i.expense_account,i.name), as_dict=True)
+            sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
+            line_total = abs(sle.valuation_rate*sle.actual_qty)
+            gle = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": i.expense_account})
+            stock_line = frappe.get_doc("GL Entry", {"voucher_no": doc.name, "account": gle.against})
+            stock_line.against = "Shipped Not Invoiced - APT"
+            stock_line.save()
+        except:
+            frappe.logger().info(sys.exc_info()[0])
 
-            if gle_rev_cost:
-                frappe.logger().info(gle_rev_cost.name)
-            #else:
-            if sle.actual_qty < 0:
-                gle_rev_cost = frappe.new_doc("GL Entry")
-                gle_rev_cost.voucher_type = gle.voucher_type
-                gle_rev_cost.to_rename = gle.to_rename
-                gle_rev_cost.cost_center = gle.cost_center
-                gle_rev_cost.voucher_no = gle.voucher_no
-                gle_rev_cost.company = gle.company
-                gle_rev_cost.is_advance = gle.is_advance
-                gle_rev_cost.docstatus = gle.docstatus
-                gle_rev_cost.remarks = i.name
-                gle_rev_cost.is_opening = "No"
-                gle_rev_cost.posting_date = gle.posting_date
-                gle_rev_cost.account_currency = gle.account_currency
-                gle_rev_cost.account = "Shipped Not Invoiced - APT"
-                gle_rev_cost.debit = line_total
-                gle_rev_cost.debit_in_account_currency = line_total
-                gle_rev_cost.against = i.expense_account
-                gle_rev_cost.credit = 0
-                gle_rev_cost.credit_in_account_currency = 0
-                gle_rev_cost.insert()
+        try:
+            if not sle:
+                gle_rev_cost = frappe.db.sql("""select name
+                from `tabGL Entry`
+                where voucher_no = %s and 
+                account = %s and remarks = %s""", (doc.name,i.expense_account,i.name), as_dict=True)
 
-                # gle_rev_cost = frappe.new_doc("GL Entry")
-                # gle_rev_cost.voucher_type = gle.voucher_type
-                # gle_rev_cost.to_rename = gle.to_rename
-                # gle_rev_cost.cost_center = gle.cost_center
-                # gle_rev_cost.voucher_no = gle.voucher_no
-                # gle_rev_cost.company = gle.company
-                # gle_rev_cost.is_advance = gle.is_advance
-                # gle_rev_cost.docstatus = gle.docstatus
-                # gle_rev_cost.remarks = i.name
-                # gle_rev_cost.is_opening = "No"
-                # gle_rev_cost.posting_date = gle.posting_date
-                # gle_rev_cost.account_currency = gle.account_currency
-                # gle_rev_cost.account = i.expense_account
-                # gle_rev_cost.debit = 0
-                # gle_rev_cost.debit_in_account_currency = 0
-                # gle_rev_cost.against = "Shipped Not Invoiced - APT"
-                # gle_rev_cost.credit = line_total
-                # gle_rev_cost.credit_in_account_currency = line_total
-                # gle_rev_cost.insert()
-            else:
-                # #pass
-                # gle_rev_cost = frappe.new_doc("GL Entry")
-                # gle_rev_cost.voucher_type = gle.voucher_type
-                # gle_rev_cost.to_rename = gle.to_rename
-                # gle_rev_cost.cost_center = gle.cost_center
-                # gle_rev_cost.voucher_no = gle.voucher_no
-                # gle_rev_cost.company = gle.company
-                # gle_rev_cost.is_advance = gle.is_advance
-                # gle_rev_cost.docstatus = gle.docstatus
-                # gle_rev_cost.remarks = i.name
-                # gle_rev_cost.is_opening = "No"
-                # gle_rev_cost.posting_date = gle.posting_date
-                # gle_rev_cost.account_currency = gle.account_currency
-                # gle_rev_cost.account = i.expense_account
-                # gle_rev_cost.debit = line_total
-                # gle_rev_cost.debit_in_account_currency = line_total
-                # gle_rev_cost.against = "Shipped Not Invoiced - APT"
-                # gle_rev_cost.credit = 0
-                # gle_rev_cost.credit_in_account_currency = 0
-                # gle_rev_cost.insert()
+                if gle_rev_cost:
+                    frappe.logger().info(gle_rev_cost.name)
+                #else:
+                if sle.actual_qty < 0:
+                    gle_rev_cost = frappe.new_doc("GL Entry")
+                    gle_rev_cost.voucher_type = gle.voucher_type
+                    gle_rev_cost.to_rename = gle.to_rename
+                    gle_rev_cost.cost_center = gle.cost_center
+                    gle_rev_cost.voucher_no = gle.voucher_no
+                    gle_rev_cost.company = gle.company
+                    gle_rev_cost.is_advance = gle.is_advance
+                    gle_rev_cost.docstatus = gle.docstatus
+                    gle_rev_cost.remarks = i.name
+                    gle_rev_cost.is_opening = "No"
+                    gle_rev_cost.posting_date = gle.posting_date
+                    gle_rev_cost.account_currency = gle.account_currency
+                    gle_rev_cost.account = "Shipped Not Invoiced - APT"
+                    gle_rev_cost.debit = line_total
+                    gle_rev_cost.debit_in_account_currency = line_total
+                    gle_rev_cost.against = gle.against
+                    gle_rev_cost.credit = 0
+                    gle_rev_cost.credit_in_account_currency = 0
+                    gle_rev_cost.insert()
 
-                gle_rev_cost = frappe.new_doc("GL Entry")
-                gle_rev_cost.voucher_type = gle.voucher_type
-                gle_rev_cost.to_rename = gle.to_rename
-                gle_rev_cost.cost_center = gle.cost_center
-                gle_rev_cost.voucher_no = gle.voucher_no
-                gle_rev_cost.company = gle.company
-                gle_rev_cost.is_advance = gle.is_advance
-                gle_rev_cost.docstatus = gle.docstatus
-                gle_rev_cost.remarks = i.name
-                gle_rev_cost.is_opening = "No"
-                gle_rev_cost.posting_date = gle.posting_date
-                gle_rev_cost.account_currency = gle.account_currency
-                gle_rev_cost.account = "Shipped Not Invoiced - APT"
-                gle_rev_cost.debit = 0
-                gle_rev_cost.debit_in_account_currency = 0
-                gle_rev_cost.against = i.expense_account
-                gle_rev_cost.credit = line_total
-                gle_rev_cost.credit_in_account_currency = line_total
-                gle_rev_cost.insert()
+                    # gle_rev_cost = frappe.new_doc("GL Entry")
+                    # gle_rev_cost.voucher_type = gle.voucher_type
+                    # gle_rev_cost.to_rename = gle.to_rename
+                    # gle_rev_cost.cost_center = gle.cost_center
+                    # gle_rev_cost.voucher_no = gle.voucher_no
+                    # gle_rev_cost.company = gle.company
+                    # gle_rev_cost.is_advance = gle.is_advance
+                    # gle_rev_cost.docstatus = gle.docstatus
+                    # gle_rev_cost.remarks = i.name
+                    # gle_rev_cost.is_opening = "No"
+                    # gle_rev_cost.posting_date = gle.posting_date
+                    # gle_rev_cost.account_currency = gle.account_currency
+                    # gle_rev_cost.account = i.expense_account
+                    # gle_rev_cost.debit = 0
+                    # gle_rev_cost.debit_in_account_currency = 0
+                    # gle_rev_cost.against = "Shipped Not Invoiced - APT"
+                    # gle_rev_cost.credit = line_total
+                    # gle_rev_cost.credit_in_account_currency = line_total
+                    # gle_rev_cost.insert()
+                else:
+                    # #pass
+                    # gle_rev_cost = frappe.new_doc("GL Entry")
+                    # gle_rev_cost.voucher_type = gle.voucher_type
+                    # gle_rev_cost.to_rename = gle.to_rename
+                    # gle_rev_cost.cost_center = gle.cost_center
+                    # gle_rev_cost.voucher_no = gle.voucher_no
+                    # gle_rev_cost.company = gle.company
+                    # gle_rev_cost.is_advance = gle.is_advance
+                    # gle_rev_cost.docstatus = gle.docstatus
+                    # gle_rev_cost.remarks = i.name
+                    # gle_rev_cost.is_opening = "No"
+                    # gle_rev_cost.posting_date = gle.posting_date
+                    # gle_rev_cost.account_currency = gle.account_currency
+                    # gle_rev_cost.account = i.expense_account
+                    # gle_rev_cost.debit = line_total
+                    # gle_rev_cost.debit_in_account_currency = line_total
+                    # gle_rev_cost.against = "Shipped Not Invoiced - APT"
+                    # gle_rev_cost.credit = 0
+                    # gle_rev_cost.credit_in_account_currency = 0
+                    # gle_rev_cost.insert()
+
+                    gle_rev_cost = frappe.new_doc("GL Entry")
+                    gle_rev_cost.voucher_type = gle.voucher_type
+                    gle_rev_cost.to_rename = gle.to_rename
+                    gle_rev_cost.cost_center = gle.cost_center
+                    gle_rev_cost.voucher_no = gle.voucher_no
+                    gle_rev_cost.company = gle.company
+                    gle_rev_cost.is_advance = gle.is_advance
+                    gle_rev_cost.docstatus = gle.docstatus
+                    gle_rev_cost.remarks = i.name
+                    gle_rev_cost.is_opening = "No"
+                    gle_rev_cost.posting_date = gle.posting_date
+                    gle_rev_cost.account_currency = gle.account_currency
+                    gle_rev_cost.account = "Shipped Not Invoiced - APT"
+                    gle_rev_cost.debit = 0
+                    gle_rev_cost.debit_in_account_currency = 0
+                    gle_rev_cost.against = gle.against
+                    gle_rev_cost.credit = line_total
+                    gle_rev_cost.credit_in_account_currency = line_total
+                    gle_rev_cost.insert()
 
         except:
             frappe.logger().info(sys.exc_info()[0])
