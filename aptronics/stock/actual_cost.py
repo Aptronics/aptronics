@@ -16,8 +16,9 @@ def get_actual_cost_by_batch(doc, method):
 			from `tabStock Ledger Entry`
 			where voucher_type = "Purchase Receipt" and 
             batch_no = %s and item_code = %s""", (i.batch_no, i.item_code))
-        i.actual_cost = frappe.utils.flt(incoming_rate[0][0])
-        total_actual_cost = total_actual_cost + (i.actual_cost * i.qty)
+        if incoming_rate:
+            i.actual_cost = frappe.utils.flt(incoming_rate[0][0])
+            total_actual_cost = total_actual_cost + (i.actual_cost * i.qty)
 
         i.gross_profit = i.amount - (i.actual_cost * i.qty)
         total_gross_profit = total_gross_profit + (i.gross_profit)
