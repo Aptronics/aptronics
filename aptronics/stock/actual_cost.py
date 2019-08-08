@@ -35,7 +35,7 @@ def accrue_shipment_cost(doc, method):
             from `tabGL Entry`
             where voucher_no = %s and 
             account = %s""", (doc.name,i.expense_account), as_dict=True)
-            if gle != []:
+            if gle:
                 frappe.db.sql("""delete from `tabGL Entry`
                             where name = %s""", (gle.name))
         except:
@@ -47,7 +47,7 @@ def accrue_shipment_cost(doc, method):
             where voucher_no = %s and 
             account = %s and remarks = %s""", (doc.name,i.expense_account,i.name), as_dict=True)
 
-            if gle_rev_cost != []:
+            if gle_rev_cost:
                 frappe.logger().info(gle_rev_cost.name)
             #else:
             if sle.actual_qty < 0:
