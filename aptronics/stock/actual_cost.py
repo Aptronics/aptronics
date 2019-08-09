@@ -146,4 +146,5 @@ def reversal_shipment_not_invoiced(doc,method):
     frappe.logger().info(method + " : " + doc.doctype)
 
 def gl_entry_insert(doc,method):
-    frappe.logger().info(method + " : " + doc.doctype)
+    frappe.logger().info(method + " : " + doc.doctype + " : " + doc.name + " : " + doc.account + " : " + doc.against
+                         + " : " + doc.voucher_type + " : " + doc.voucher_no)
