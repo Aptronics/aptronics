@@ -86,6 +86,9 @@ doc_events = {
 	},
   "Delivery Note": {
 		"on_submit": "aptronics.stock.actual_cost.shipped_not_invoiced",
+	},
+	"GL Entry": {
+		"on_insert":"aptronics.stock.actual_cost.gl_entry_insert"
 	}
  }
 
