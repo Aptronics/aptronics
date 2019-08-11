@@ -151,6 +151,7 @@ def update_lot(doc,method):
         prc = frappe.get_doc("Purchase Receipt", doc.reference_name)
         if prc:
             frappe.logger().info(str(prc))
+            frappe.logger().info(doc.doctype)
             frappe.logger().info(str(doc))
     else:
         if doc.actual_qty>0:
