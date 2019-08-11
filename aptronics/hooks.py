@@ -87,15 +87,15 @@ doc_events = {
   #"Delivery Note": {
 	#	"on_submit": "aptronics.stock.actual_cost.shipped_not_invoiced",
 	#},
-	"GL Entry": {
-		"before_insert":"aptronics.stock.actual_cost.gl_entry_insert"
-	},
+	#"GL Entry": {
+	#	"before_insert":"aptronics.stock.actual_cost.gl_entry_insert"
+	#},
 	#"Stock Ledger Entry":{
 	#	"before_insert":"aptronics.stock.actual_cost.update_lot"
 	#},
-	"Batch": {
-		"before_insert": "aptronics.stock.actual_cost.update_lot"
-	}
+	#"Batch": {
+	#	"before_insert": "aptronics.stock.actual_cost.update_lot"
+	#}
  }
 
 # Scheduled Tasks
