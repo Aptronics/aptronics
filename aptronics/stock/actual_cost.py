@@ -148,7 +148,7 @@ def reversal_shipment_not_invoiced(doc,method):
 
 def update_lot(doc,method):
     if doc.actual_qty>0:
-        doc.batch_no = doc.batch_no + "@" + doc.incoming_rate
+        doc.batch_no = doc.batch_no + "@" + str(doc.incoming_rate)
 
 
 def gl_entry_insert(doc,method):

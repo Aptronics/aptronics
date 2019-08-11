@@ -90,9 +90,9 @@ doc_events = {
 	"GL Entry": {
 		"before_insert":"aptronics.stock.actual_cost.gl_entry_insert"
 	},
-	"Stock Ledger Entry":{
-		"before_insert":"aptronics.stock.actual_cost.update_lot"
-	}
+	#"Stock Ledger Entry":{
+	#	"before_insert":"aptronics.stock.actual_cost.update_lot"
+	#}
  }
 
 # Scheduled Tasks
