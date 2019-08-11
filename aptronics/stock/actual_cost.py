@@ -147,8 +147,13 @@ def reversal_shipment_not_invoiced(doc,method):
 
 
 def update_lot(doc,method):
-    if doc.actual_qty>0:
-        doc.batch_no = doc.batch_no + "@" + str(doc.incoming_rate)
+    if doc.doctype == 'Batch' and doc.reference_doctype == "Purchase Receipt":
+        prc = frappe.get_doc("Purchase Receipt", doc.reference_name)
+        if prc:
+            frappe.logger().info(str(prc))
+    else:
+        if doc.actual_qty>0:
+            doc.batch_no = doc.batch_no + "@" + str(doc.incoming_rate)
 
 
 def gl_entry_insert(doc,method):

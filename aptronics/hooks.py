@@ -92,7 +92,10 @@ doc_events = {
 	},
 	#"Stock Ledger Entry":{
 	#	"before_insert":"aptronics.stock.actual_cost.update_lot"
-	#}
+	#},
+	"Batch": {
+		"before_imsert": "aptronics.stock.actual_cost.update_lot"
+	}
  }
 
 # Scheduled Tasks
