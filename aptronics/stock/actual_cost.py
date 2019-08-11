@@ -173,12 +173,13 @@ def gl_entry_insert(doc,method):
                 for i in dnote.items:
                     try:
                         sle = frappe.get_doc("Stock Ledger Entry", {"voucher_detail_no": i.name})
-                        line_total = abs(sle.valuation_rate * sle.actual_qty)
                     except:
                         frappe.logger().info(sys.exc_info()[0])
 
                     try:
                         if sle:
+                            frappe.logger().info(sle.valuation_rate)
+                            line_total = abs(sle.valuation_rate * sle.actual_qty)
                             gle_rev_cost = frappe.db.sql("""select name
                             from `tabGL Entry`
                             where voucher_no = %s and 
