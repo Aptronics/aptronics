@@ -145,6 +145,12 @@ def shipped_not_invoiced(doc, method):
 def reversal_shipment_not_invoiced(doc,method):
     frappe.logger().info(method + " : " + doc.doctype)
 
+
+def update_lot(doc,method):
+    if doc.actual_qty>0:
+        doc.batch_no = doc.batch_no + "@" + doc.incoming_rate
+
+
 def gl_entry_insert(doc,method):
     if doc.voucher_type == "Delivery Note":
         frappe.logger().info(
