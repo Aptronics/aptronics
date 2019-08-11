@@ -146,8 +146,11 @@ def reversal_shipment_not_invoiced(doc,method):
     frappe.logger().info(method + " : " + doc.doctype)
 
 def gl_entry_insert(doc,method):
-    frappe.logger().info(method + " : " + str(doc.doctype) + " : " + str(doc.name) + " : " + str(doc.account) + " : " + str(doc.against) + " : " + str(doc.voucher_type) + " : " + str(doc.voucher_no))
     if doc.voucher_type == "Delivery Note":
+        frappe.logger().info(
+            method + " : " + str(doc.doctype) + " : " + str(doc.name) + " : " + str(doc.account) + " : " + str(
+                doc.against) + " : " + str(doc.voucher_type) + " : " + str(doc.voucher_no))
+
         if doc.account == "Stock In Hand - APT":
             doc.against = "Shipped Not Invoiced - APT"
         else:
