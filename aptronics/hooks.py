@@ -94,7 +94,7 @@ doc_events = {
 	#	"before_insert":"aptronics.stock.actual_cost.update_lot"
 	#},
 	"Batch": {
-		"before_imsert": "aptronics.stock.actual_cost.update_lot"
+		"before_insert": "aptronics.stock.actual_cost.update_lot"
 	}
  }
 
