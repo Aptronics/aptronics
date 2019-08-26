@@ -96,8 +96,8 @@ doc_events = {
 	#"Batch": {
 	#	"before_insert": "aptronics.stock.actual_cost.update_lot"
 	#}
-	"Queue": {
-		"before_insert":" aptronics.business_rule.email.check_email_address"
+	"Email Queue": {
+		"before_insert" : " aptronics.business_rule.email.check_email_address"
 	}
  }
 
