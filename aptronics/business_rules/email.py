@@ -10,23 +10,31 @@ def check_email_address(doc, method):
     frappe.logger().info(doc)
     list = ''
     domains = ['aptronics.co.za', 'eoh.com', 'eoh.co.za', 'ioco.tech']
-    for i in doc.recipients.split(","):
-        if i.split("@")[1] in domains:
-            list = list + i + ','
+    try:
+        for i in doc.recipients.split(","):
+            if i.split("@")[1] in domains:
+                list = list + i + ','
+    except:
+        pass
 
     doc.recipients = list
-
     list = ''
-    for i in doc.cc.split(","):
-        if i.split("@")[1] in domains:
-            list = list + i + ','
+    try:
+        for i in doc.cc.split(","):
+            if i.split("@")[1] in domains:
+                list = list + i + ','
+
+    except:
+        pass
 
     doc.cc = list
-
     list = ''
-    for i in doc.bcc.split(","):
-        if i.split("@")[1] in domains:
-            list = list + i + ','
+    try:
+        for i in doc.bcc.split(","):
+            if i.split("@")[1] in domains:
+                list = list + i + ','
+    except:
+        pass
 
     doc.bcc = list
     #    index = index + 1
