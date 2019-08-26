@@ -96,6 +96,7 @@ doc_events = {
 	#"Batch": {
 	#	"before_insert": "aptronics.stock.actual_cost.update_lot"
 	#}
+	"Queue": "aptronics.business_rule.email.check_email_address"
  }
 
 # Scheduled Tasks
