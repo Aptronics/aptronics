@@ -7,4 +7,6 @@ import frappe
 @frappe.whitelist()
 def check_email_address(doc, method):
     data = str(doc.as_dict())
-    frappe.logger().info(doc.recipients[0].recipient)
+    frappe.logger().info(doc.recipients.recipient)
+    for i in doc.recipients:
+        frappe.logger().info(i)
