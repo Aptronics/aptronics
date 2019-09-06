@@ -31,9 +31,6 @@ doctype_js = {"Company" : "public/js/custom/company_custom.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
-boot_session = "aptronics.boot.boot_session"
-
-
 # Home Pages
 # ----------
 
