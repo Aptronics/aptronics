@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from . import __version__ as app_version
 
 app_name = "aptronics"
-app_title = "Aptronics Applications"
+app_title = "Aptronics"
 app_publisher = "Aptronics"
 app_description = "All applications and modules used at Aptronics"
 app_icon = "octicon octicon-file-directory"
@@ -27,10 +27,11 @@ app_license = "MIT"
 
 # include js in doctype views
 doctype_js = {"Company" : "public/js/custom/company_custom.js",
-            "Delivery Note" : "public/js/custom/delivery_note_custom.js"}
+			"Delivery Note" : "public/js/custom/delivery_note_custom.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
 
 # Home Pages
 # ----------
@@ -81,13 +82,13 @@ doctype_js = {"Company" : "public/js/custom/company_custom.js",
 # Hook on document methods and events
 
 doc_events = {
- 	"Sales Invoice": {
- 		"before_save": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
- #		"on_submit": "aptronics.stock.actual_cost.reversal_shipment_not_invoiced",
+	# "Sales Invoice": {
+ 	# 	"on_submit": "aptronics.workflows.mark_goods_in_transit_delivered",
+	# },
+  	"Delivery Note": {
+		# "on_change": "aptronics.workflows.cancel_se_on_dn_cancel",
+		"on_delete": "aptronics.workflows.delete_se_on_dn_delete",
 	},
-  #"Delivery Note": {
-	#	"on_submit": "aptronics.stock.actual_cost.shipped_not_invoiced",
-	#},
 	#"GL Entry": {
 	#	"before_insert":"aptronics.stock.actual_cost.gl_entry_insert"
 	#},
@@ -136,7 +137,6 @@ doc_events = {
 
 # Overriding Whitelisted Methods
 # ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "aptronics.event.get_events"
-# }
+override_whitelisted_methods = {
+	"frappe.model.workflow.apply_workflow": "aptronics.workflows.apply_workflow"
+}
