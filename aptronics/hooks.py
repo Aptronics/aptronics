@@ -57,7 +57,7 @@ doctype_js = {"Company" : "public/js/custom/company_custom.js",
 # ------------
 
 # before_install = "aptronics.install.before_install"
-# after_install = "aptronics.install.after_install"
+after_install = "aptronics.patches.create_delivery_note_workflow.execute"
 
 # Desk Notifications
 # ------------------
