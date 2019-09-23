@@ -12,7 +12,7 @@ frappe.ui.form.on("Delivery Note", {
 });
 
 function create_invoice(frm){
-	if(frm.doc.last_workflow_action == 'Deliver and Create Invoice'){
+	if(frm.doc.last_workflow_action == 'Delivered and Create Invoice'){
 		frm.doc.last_workflow_action = 'Submitted';
 		frappe.db.set_value("Delivery Note", frm.doc.name, 'last_workflow_action', 'Submitted',
 			() => {});
@@ -23,7 +23,7 @@ function create_invoice(frm){
 	}
 }
 function git_read_only(frm){
-	if(frm.doc.workflow_state == 'Goods in Transit'){
+	if(frm.doc.workflow_state == 'Goods in Transit' || frm.doc.workflow_state == 'Delivered'){
 		frm.set_read_only(1);
 	}
 }

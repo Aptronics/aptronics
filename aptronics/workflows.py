@@ -17,7 +17,7 @@ custom_workflow_actions_map = {
 	"Delivery Note": {
 		"Ship Goods": "aptronics.workflows.make_goods_in_transit_stock_entry",
 		"Return Goods in Transit": "aptronics.workflows.reverse_goods_in_transit_stock_entry",
-		"Deliver and Create Invoice": "aptronics.workflows.deliver_and_make_invoice",
+		"Delivered and Create Invoice": "aptronics.workflows.deliver_and_make_invoice",
 	}
 }
 
@@ -47,6 +47,7 @@ def make_goods_in_transit_stock_entry(doc):
 			'batch_no': item.batch_no,
 			'description': item.description,
 		})
+		item.warehouse = gita_wh
 	se.save()
 	se.submit()
 	doc.goods_in_transit_stock_entry = se.name
@@ -58,6 +59,7 @@ def reverse_goods_in_transit_stock_entry(doc):
 	doc.goods_in_transit_stock_entry = ''
 	for item in se.items:
 		doc.items = []
+		print(item.s_warehouse, item.t_warehouse)
 		doc.append('items',
 		{
 			'warehouse': item.s_warehouse,
@@ -73,6 +75,7 @@ def reverse_goods_in_transit_stock_entry(doc):
 			'description': item.description,
 		})
 	se.cancel()
+	print(doc)
 	return doc
 
 def deliver_and_make_invoice(doc):
@@ -86,12 +89,7 @@ def cancel_se_on_dn_cancel(doc, method):
 		return
 	se = frappe.get_doc("Stock Entry", doc.goods_in_transit_stock_entry)
 	if se.docstatus == 1:
-		try:
-			se.cancel()
-			doc.goods_in_transit_stock_entry = ''
-			return doc
-		except:
-			pass
+		return reverse_goods_in_transit_stock_entry(doc)
 
 def delete_se_on_dn_delete(doc, method):
 	if not goods_in_transit_stock_entry:
