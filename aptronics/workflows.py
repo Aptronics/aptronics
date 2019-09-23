@@ -22,8 +22,7 @@ custom_workflow_actions_map = {
 }
 
 def call_custom_workflow_actions(doc, action):
-	if getattr(doc, 'last_workflow_action', None) is not None:
-		doc.last_workflow_action = action
+	doc.last_workflow_action = action
 	if custom_workflow_actions_map.get(doc.doctype).get(action):
 		doc = frappe.call(custom_workflow_actions_map.get(doc.doctype).get(action), doc=doc)
 	return doc
@@ -56,6 +55,7 @@ def make_goods_in_transit_stock_entry(doc):
 
 def reverse_goods_in_transit_stock_entry(doc):
 	se = frappe.get_doc("Stock Entry", doc.goods_in_transit_stock_entry)
+	doc.goods_in_transit_stock_entry = ''
 	for item in se.items:
 		doc.items = []
 		doc.append('items',
@@ -73,7 +73,6 @@ def reverse_goods_in_transit_stock_entry(doc):
 			'description': item.description,
 		})
 	se.cancel()
-	doc.goods_in_transit_stock_entry = ''
 	return doc
 
 def deliver_and_make_invoice(doc):
@@ -87,9 +86,12 @@ def cancel_se_on_dn_cancel(doc, method):
 		return
 	se = frappe.get_doc("Stock Entry", doc.goods_in_transit_stock_entry)
 	if se.docstatus == 1:
-		se.cancel()
-	doc.goods_in_transit_stock_entry = ''
-	return doc
+		try:
+			se.cancel()
+			doc.goods_in_transit_stock_entry = ''
+			return doc
+		except:
+			pass
 
 def delete_se_on_dn_delete(doc, method):
 	if not goods_in_transit_stock_entry:

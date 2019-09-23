@@ -13,6 +13,7 @@ frappe.ui.form.on("Delivery Note", {
 
 function create_invoice(frm){
 	if(frm.doc.last_workflow_action == 'Deliver and Create Invoice'){
+		frm.doc.last_workflow_action = 'Submitted';
 		frappe.db.set_value("Delivery Note", frm.doc.name, 'last_workflow_action', 'Submitted',
 			() => {});
 		frappe.model.open_mapped_doc({

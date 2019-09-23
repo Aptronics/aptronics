@@ -57,7 +57,7 @@ doctype_js = {"Company" : "public/js/custom/company_custom.js",
 # ------------
 
 
-before_install = "aptronics.patches.create_delivery_note_workflow.execute"
+# before_install = "aptronics.patches.create_delivery_note_workflow.execute"
 # after_install = "aptronics"
 
 # Desk Notifications
@@ -87,7 +87,7 @@ doc_events = {
  	# 	"on_submit": "aptronics.workflows.mark_goods_in_transit_delivered",
 	# },
   	"Delivery Note": {
-		# "on_change": "aptronics.workflows.cancel_se_on_dn_cancel",
+		"on_cancel": "aptronics.workflows.cancel_se_on_dn_cancel",
 		"on_delete": "aptronics.workflows.delete_se_on_dn_delete",
 	},
 	#"GL Entry": {
