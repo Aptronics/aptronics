@@ -6,3 +6,4 @@ import frappe
 import erpnext.setup.doctype.naming_series
 
 def business_partner_naming_series(doc, method):
+    frappe.logger().info(doc)
