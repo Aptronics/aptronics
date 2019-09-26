@@ -34,7 +34,9 @@ website_context = {
 # include js in doctype views
 doctype_js = {"Company" : "public/js/custom/company_custom.js",
 			"Delivery Note" : "public/js/custom/delivery_note_custom.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
+                    "Purchase Order": "public/js/custom/purchase_order_list.js"
+                    }
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -89,12 +91,19 @@ doctype_js = {"Company" : "public/js/custom/company_custom.js",
 # Hook on document methods and events
 
 doc_events = {
+	"Sales Order": {
+		"validate": "aptronics.workflows.check_so_backorder_status"
+	},
 	# "Sales Invoice": {
  	# 	"on_submit": "aptronics.workflows.mark_goods_in_transit_delivered",
 	# },
   	"Delivery Note": {
 		"on_cancel": "aptronics.workflows.cancel_se_on_dn_cancel",
 		"on_delete": "aptronics.workflows.delete_se_on_dn_delete",
+	},
+	"Purchase Order": {
+		"on_submit": "aptronics.workflows.update_so_with_dropship_po",
+		"on_cancel": "aptronics.workflows.unlink_dropship_po"
 	},
 	#"GL Entry": {
 	#	"before_insert":"aptronics.stock.actual_cost.gl_entry_insert"
