@@ -100,10 +100,10 @@ doc_events = {
 		"before_insert" : "aptronics.business_rules.email.check_email_address"
 	},
 	"Customer":{
-		"autoname":"aptronics.business_rules.naming_series.business_partner_naming_series"
+		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
 	},
 	"Supplier":{
-		"autoname":"aptronics.business_rules.naming_series.business_partner_naming_series"
+		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
 	}
  }
 
