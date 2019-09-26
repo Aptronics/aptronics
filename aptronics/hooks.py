@@ -101,6 +101,9 @@ doc_events = {
 	},
 	"Customer":{
 		"autoname":"aptronics.business_rules.naming_series.business_partner_naming_series"
+	},
+	"Supplier":{
+		"autoname":"aptronics.business_rules.naming_series.business_partner_naming_series"
 	}
  }
 
