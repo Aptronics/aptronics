@@ -99,12 +99,12 @@ doc_events = {
 	"Communication": {
 		"before_insert" : "aptronics.business_rules.email.check_email_address"
 	},
-	"Customer":{
-		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
-	},
-	"Supplier":{
-		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
-	}
+	#"Customer":{
+	#	"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
+	#},
+	#"Supplier":{
+	#	"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
+	#}
  }
 
 # Scheduled Tasks
