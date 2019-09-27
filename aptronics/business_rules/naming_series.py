@@ -23,6 +23,12 @@ def update_series(series, current_value):
 
 		frappe.db.sql("update `tabSeries` set current = %s where name = %s",
 			(current_value, prefix))
-		return True #(_("Series Updated Successfully"))
+		frappe.logger().info("Series Updated Successfully")
+		frappe.logger().info(str(series))
+		frappe.logger().info(str(current_value))
+		return True
 	else:
+		frappe.logger().info("Series Not Updated - Please select prefix first")
+		frappe.logger().info(str(series))
+		frappe.logger().info(str(current_value))
 		return False #msgprint(_("Please select prefix first"))
