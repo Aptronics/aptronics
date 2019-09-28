@@ -29,7 +29,7 @@ def update_series(series, current_value):
         frappe.logger().info("no, create it")
         frappe.db.sql("INSERT INTO `tabSeries` (`name`, `current`) VALUES (%s, %s)", (series,current_value))
         current = current_value
-    return ('%0' + str("####") + 'd') % current
+    return current
 
     # if series:
     #     prefix = series.split('.')[0]
