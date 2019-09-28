@@ -19,12 +19,13 @@ def update_series(series, current_value):
 	if series:
 		prefix = series.split('.')[0]
 		frappe.logger().info(str(prefix))
-		frappe.logger().info(str(series))
+
 		if not frappe.db.exists('Series', series):
+			frappe.logger().info("No series: " + str(series))
 			frappe.db.sql("insert into tabSeries (name, current) values (%s, 0)", (series))
 
 		frappe.db.sql("update `tabSeries` set current = %s where name = %s",
-			(current_value, prefix))
+			(current_value, series))
 		frappe.logger().info("Series Updated Successfully")
 		frappe.logger().info(str(series))
 		frappe.logger().info(str(current_value))
