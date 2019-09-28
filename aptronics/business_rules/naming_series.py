@@ -18,6 +18,8 @@ def business_partner_naming_series(doc, method):
 def update_series(series, current_value):
 	if series:
 		prefix = series.split('.')[0]
+		frappe.logger().info(str(prefix))
+		frappe.logger().info(str(series))
 		if not frappe.db.exists('Series', series):
 			frappe.db.sql("insert into tabSeries (name, current) values (%s, 0)", (series))
 
