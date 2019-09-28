@@ -27,8 +27,8 @@ def update_series(series, current_value):
         current = cint(current) + 1
     else:
         frappe.logger().info("no, create it")
-        frappe.db.sql("INSERT INTO `tabSeries` (`name`, `current`) VALUES (%s, 1)", (series,))
-        current = 1
+        frappe.db.sql("INSERT INTO `tabSeries` (`name`, `current`) VALUES (%s, %s)", (series,current_value))
+        current = current_value
     return ('%0' + str("####") + 'd') % current
 
     # if series:
