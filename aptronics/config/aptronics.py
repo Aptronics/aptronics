@@ -11,7 +11,12 @@ def get_data():
 					"type": "doctype",
 					"name": "Assessment",
 					"description":_("SPORT.io assessment application")
-				}
+				},
+				{
+					"type": "doctype",
+					"name": "Aptronics Settings",
+					"description": _("Aptronics Settings for custom processes")
+				},
 			]
 		},
 		{

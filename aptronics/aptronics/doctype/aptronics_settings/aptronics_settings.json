@@ -1,0 +1,41 @@
+{
+ "autoname": "naming_series:",
+ "creation": "2019-09-30 10:05:50.015759",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "description": "Amend 3 Letter Naming Series",
+   "fieldname": "naming_series",
+   "fieldtype": "Check",
+   "label": "Naming Series"
+  }
+ ],
+ "issingle": 1,
+ "modified": "2019-09-30 10:06:57.073266",
+ "modified_by": "Administrator",
+ "module": "Aptronics",
+ "name": "Aptronics Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
