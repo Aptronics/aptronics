@@ -32,8 +32,7 @@ website_context = {
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Company" : "public/js/custom/company_custom.js",
-			"Delivery Note" : "public/js/custom/delivery_note_custom.js"}
+doctype_js = {}
 doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
                     "Purchase Order": "public/js/custom/purchase_order_list.js"
                     }
@@ -94,13 +93,13 @@ doc_events = {
 	"Sales Order": {
 		"validate": "aptronics.workflows.check_so_backorder_status"
 	},
-	# "Sales Invoice": {
- 	# 	"on_submit": "aptronics.workflows.mark_goods_in_transit_delivered",
-	# },
-  	"Delivery Note": {
-		"on_cancel": "aptronics.workflows.cancel_se_on_dn_cancel",
-		"on_delete": "aptronics.workflows.delete_se_on_dn_delete",
+	"Sales Invoice": {
+ 		"onload": "aptronics.workflows.update_gita_warehouse_in_si",
 	},
+  	# "Delivery Note": {
+	# 	"on_cancel": "aptronics.workflows.cancel_se_on_dn_cancel",
+	# 	"on_delete": "aptronics.workflows.delete_se_on_dn_delete",
+	# },
 	"Purchase Order": {
 		"on_submit": "aptronics.workflows.update_so_with_dropship_po",
 		"on_cancel": "aptronics.workflows.unlink_dropship_po"

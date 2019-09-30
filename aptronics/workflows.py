@@ -28,83 +28,6 @@ def call_custom_workflow_actions(doc, action):
 		doc = frappe.call(custom_workflow_actions_map.get(doc.doctype).get(action), doc=doc)
 	return doc
 
-# delivery note/ goods in transit custom workflow
-def make_goods_in_transit_stock_entry(doc):
-	se = frappe.new_doc("Stock Entry")
-	gita_wh = frappe.get_cached_value('Company', doc.company, "default_goods_in_transit_warehouse")
-	se.stock_entry_type = 'Material Transfer'
-	for item in doc.items:
-		se.append('items',
-		{
-			's_warehouse': item.warehouse,
-			't_warehouse': gita_wh,
-			'qty': item.qty,
-			'item_code': item.item_code,
-			'item_name': item.item_name,
-			'stock_uom': item.stock_uom,
-			'uom': item.uom,
-			'conversion_factor': 1,
-			'basic_rate': item.rate,
-			'serial_no': item.serial_no,
-			'batch_no': item.batch_no,
-			'description': item.description,
-		})
-		item.warehouse = gita_wh
-	se.save()
-	se.submit()
-	doc.goods_in_transit_stock_entry = se.name
-	return doc
-
-# delivery note/ goods in transit custom workflow
-def reverse_goods_in_transit_stock_entry(doc):
-	se = frappe.get_doc("Stock Entry", doc.goods_in_transit_stock_entry)
-	doc.goods_in_transit_stock_entry = ''
-	for item in se.items:
-		doc.items = []
-		print(item.s_warehouse, item.t_warehouse)
-		doc.append('items',
-		{
-			'warehouse': item.s_warehouse,
-			'qty': item.qty,
-			'item_code': item.item_code,
-			'item_name': item.item_name,
-			'stock_uom': item.stock_uom,
-			'uom': item.uom,
-			'conversion_factor': 1,
-			'rate': item.basic_rate,
-			'serial_no': item.serial_no,
-			'batch_no': item.batch_no,
-			'description': item.description,
-		})
-	se.cancel()
-	print(doc)
-	return doc
-
-# delivery note/ goods in transit custom workflow
-def deliver_and_make_invoice(doc):
-	return doc
-
-# delivery note/ goods in transit custom workflow
-def cancel_se_on_dn_cancel(doc, method):
-	if doc.docstatus != 2:
-		return doc
-	if not doc.goods_in_transit_stock_entry:
-		return
-	se = frappe.get_doc("Stock Entry", doc.goods_in_transit_stock_entry)
-	if se.docstatus == 1:
-		return reverse_goods_in_transit_stock_entry(doc)
-
-# delivery note/ goods in transit custom workflow
-def delete_se_on_dn_delete(doc, method):
-	if not goods_in_transit_stock_entry:
-		return
-	se = frappe.get_doc("Stock Entry", doc.goods_in_transit_stock_entry)
-	if se.docstatus == 1:
-		se.cancel()
-	se.delete()
-	doc.goods_in_transit_stock_entry = ''
-	return doc
-
 # sales order
 def check_so_backorder_status(so, method):
 	so.total_backordered_qty = 0
@@ -147,3 +70,11 @@ def unlink_dropship_po(po, method):
 			frappe.db.set_value("Sales Order", so.name, "delivery_status", "Drop Shipped")
 			# frappe.db.set_value("Sales Order", so.name, "per_delivered", drop_ship_per)
 	return po
+
+
+# Sales Invoice
+def update_gita_warehouse_in_si(si, method):
+	for item in si.items:
+		gita_warehouse = frappe.get_value("Delivery Note Item", item.dn_detail, 'target_warehouse')
+		item.warehouse = gita_warehouse if gita_warehouse else item.warehouse
+	return si
