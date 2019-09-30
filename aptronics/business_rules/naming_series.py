@@ -9,12 +9,15 @@ import erpnext.setup.doctype.naming_series
 
 def business_partner_naming_series(doc, method):
     # frappe.logger().info(doc.name)
-    #check the setting, if on then apply, else use the std: TODO: Add setting option in Aptronics App
-    if doc.doctype == "Customer":
-        doc.naming_series = "C-" + doc.customer_name[:3].upper() + ".####"  # doc.customer_name[:3].upper() + ".####" #
+    #check the setting, if on then apply, else use the std:
+    setting = frappe.get_doc('Aptronics Settings')
+    if setting:
+        if setting.series_naming:
+            if doc.doctype == "Customer":
+                doc.naming_series = "C-" + doc.customer_name[:3].upper() + ".####"  # doc.customer_name[:3].upper() + ".####" #
 
-    if doc.doctype == "Supplier":
-        doc.naming_series = "S-" + doc.supplier_name[:3].upper() + ".####"  # doc.supplier_name[:3].upper() + ".####" #
+            if doc.doctype == "Supplier":
+                doc.naming_series = "S-" + doc.supplier_name[:3].upper() + ".####"  # doc.supplier_name[:3].upper() + ".####" #
 
 
 @frappe.whitelist(allow_guest=False)
