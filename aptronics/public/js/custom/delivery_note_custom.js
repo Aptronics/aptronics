@@ -2,8 +2,13 @@ frappe.ui.form.on("Delivery Note", {
 	refresh: (frm) => {
 		get_gita_wh(frm);
 	},
-	onload: (frm) => {
+	onload_post_render: (frm) => {
 		get_gita_wh(frm);
+		frm.remove_custom_button("Sales Invoice", __('Create'));
+		frm.add_custom_button(__('Sales Invoice'), () => {
+			make_sales_invoice(frm);
+		},
+		__('Create'));
 	}
 });
 
@@ -35,4 +40,12 @@ function get_gita_wh(frm, cdt, cdn){
 			}
 		});
 	}
+}
+
+function make_sales_invoice(frm) {
+	// console.log(frm.doc.name)
+	frappe.model.open_mapped_doc({
+		method: "aptronics.overrides.make_sales_invoice",
+		frm: frm
+	});
 }

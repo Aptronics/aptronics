@@ -17,7 +17,7 @@ app_license = "MIT"
 # include js, css files in header of desk.html
 app_include_css = "/assets/aptronics/css/aptronics.css"
 app_logo_url = '/assets/aptronics/images/Aptronics-lettermark.svg'
-# app_include_js = "/assets/aptronics/js/aptronics.js"
+# app_include_js = "/assets/js/aptronics.min.js"
 
 website_context = {
 	"favicon": '/assets/aptronics/images/favicon-96x96.png',
@@ -34,8 +34,8 @@ website_context = {
 # include js in doctype views
 doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js"}
 doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
-                    "Purchase Order": "public/js/custom/purchase_order_list.js"
-                    }
+					"Purchase Order": "public/js/custom/purchase_order_list.js"
+					}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -94,9 +94,9 @@ doc_events = {
 		"validate": "aptronics.workflows.check_so_backorder_status"
 	},
 	"Sales Invoice": {
- 		"onload": "aptronics.workflows.update_gita_warehouse_in_si",
+		"onload": "aptronics.workflows.update_gita_warehouse_in_si",
 	},
-  	# "Delivery Note": {
+	# "Delivery Note": {
 	# 	"on_cancel": "aptronics.workflows.cancel_se_on_dn_cancel",
 	# 	"on_delete": "aptronics.workflows.delete_se_on_dn_delete",
 	# },
@@ -152,6 +152,7 @@ doc_events = {
 
 # Overriding Whitelisted Methods
 # ------------------------------
-override_whitelisted_methods = {
-	"frappe.model.workflow.apply_workflow": "aptronics.workflows.apply_workflow"
-}
+# override_whitelisted_methods = {
+# 	"erpnext.stock.doctype.delivery_note.make_sales_invoice" : "aptronics.overrides.make_sales_invoice"
+# 	# "frappe.model.workflow.apply_workflow": "aptronics.workflows.apply_workflow"
+# }

@@ -75,6 +75,7 @@ def unlink_dropship_po(po, method):
 # Sales Invoice
 def update_gita_warehouse_in_si(si, method):
 	for item in si.items:
-		gita_warehouse = frappe.get_value("Delivery Note Item", item.dn_detail, 'target_warehouse')
-		item.warehouse = gita_warehouse if gita_warehouse else item.warehouse
+		if item.dn_detail:
+			gita_warehouse = frappe.get_value("Delivery Note Item", item.dn_detail, 'target_warehouse')
+			item.warehouse = gita_warehouse if gita_warehouse else item.warehouse
 	return si
