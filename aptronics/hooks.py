@@ -32,7 +32,7 @@ website_context = {
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {}
+doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js"}
 doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
                     "Purchase Order": "public/js/custom/purchase_order_list.js"
                     }

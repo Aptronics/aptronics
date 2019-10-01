@@ -13,7 +13,7 @@ def apply_workflow(doc, action):
 	doc = call_custom_workflow_actions(doc, action)
 	return model_apply_workflow(doc, action)
 
-
+# deprecated, left here as an example
 custom_workflow_actions_map = {
 	"Delivery Note": {
 		"Ship Goods": "aptronics.workflows.make_goods_in_transit_stock_entry",
