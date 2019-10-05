@@ -104,7 +104,11 @@ doc_events = {
 	},
 	"Supplier":{
 		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
+	},
+	"Sales Order":{
+		"validation":"aptronics.business_rules.validations.sales_order_unique_by_customer"
 	}
+
  }
 
 # Scheduled Tasks
