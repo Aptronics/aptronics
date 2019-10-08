@@ -104,10 +104,10 @@ doc_events = {
 	},
 	"Supplier":{
 		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
-	}#,
-	#"Sales Order":{
-	#	"validate":"aptronics.business_rules.validations.sales_order_unique_by_customer"
-	#}
+	},
+	"Sales Order":{
+		"validate":"aptronics.business_rules.validations.sales_order_unique_by_customer"
+	}
 
  }
 
