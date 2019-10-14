@@ -15,3 +15,7 @@ def sales_order_unique_by_customer(doc,method):
             frappe.throw(
                 _("Warning: Sales Order {0} already exists against Customer's Purchase Order {1}").format(so[0][0],
                                                                                                           doc.po_no))
+
+def purchase_invoice_excluding_price_check(doc,method):
+    if doc.validate_excluding_invoice_total <> doc.total:
+        frappe.throw(_("Please check Totals."))

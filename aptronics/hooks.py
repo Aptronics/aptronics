@@ -107,6 +107,9 @@ doc_events = {
 	},
 	"Sales Order":{
 		"validate":"aptronics.business_rules.validations.sales_order_unique_by_customer"
+	},
+	"Purchase Invoice":{
+		"validate":"aptronics.business_rules.validations.purchase_invoice_excluding_price_check"
 	}
 
  }
