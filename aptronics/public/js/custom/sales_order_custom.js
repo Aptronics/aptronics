@@ -1,16 +1,6 @@
 frappe.ui.form.on("Sales Order", {
 	refresh: (frm) => {
 	  // this.frm.add_custom_button(__('Purchase Order'), () => this.make_purchase_order(), __('Create'));
-
-	},
-	buyer: (frm) => {
-		if(frm.doc.buyer){
-			frappe.db.get_value('User', frm.doc.buyer, 'full_name', (r) => {
-				if(r && r.full_name != undefined){
-					frm.doc.buyer_name = r.full_name;
-				}
-			});
-		}
 	}
 	// onload_post_render: (frm) => {
 	// 	frm.remove_custom_button("Purchase Order", __('Create'));
