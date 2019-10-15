@@ -32,7 +32,8 @@ website_context = {
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js"}
+doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js",
+			"Sales Invoice": "public/js/custom/sales_invoice_custom.js"}
 doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
 					"Purchase Order": "public/js/custom/purchase_order_list.js"
 					}
@@ -141,6 +142,6 @@ doc_events = {
 # Overriding Whitelisted Methods
 # ------------------------------
 # override_whitelisted_methods = {
-# 	"erpnext.stock.doctype.delivery_note.make_sales_invoice" : "aptronics.overrides.make_sales_invoice"
-# 	# "frappe.model.workflow.apply_workflow": "aptronics.workflows.apply_workflow"
+# 	"erpnext.stock.doctype.delivery_note.delivery_note.make_sales_invoice":
+# 	"aptronics.overrides.make_aptronics_sales_invoice"
 # }
