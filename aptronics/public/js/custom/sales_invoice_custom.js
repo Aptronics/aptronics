@@ -1,6 +1,7 @@
 frappe.ui.form.on("Sales Invoice", {
 	refresh: (frm) => {
 		frm.cscript.delivery_note_btn = patchDeliveryNoteBtn(frm);
+		toggleNamingSeries(frm);
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);
