@@ -22,6 +22,9 @@ frappe.ui.form.on("Delivery Note Item", {
 });
 
 function get_gita_wh(frm, cdt, cdn){
+	if(frm.doc.is_return == 1){
+		return;
+	}
 	if(cdn == undefined){
 		frm.doc.items.forEach((d) => {
 			frappe.db.get_value("Company", frm.doc.company, 'default_goods_in_transit_warehouse', (r) => {
@@ -43,9 +46,8 @@ function get_gita_wh(frm, cdt, cdn){
 }
 
 function make_sales_invoice(frm) {
-	// console.log(frm.doc.name)
 	frappe.model.open_mapped_doc({
-		method: "aptronics.overrides.make_sales_invoice",
+		method: "aptronics.overrides.make_aptronics_sales_invoice",
 		frm: frm
 	});
 }
