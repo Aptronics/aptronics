@@ -9,6 +9,9 @@ frappe.ui.form.on("Delivery Note", {
 			make_sales_invoice(frm);
 		},
 		__('Create'));
+	},
+	is_return: (frm) => {
+		toggleNamingSeries(frm);
 	}
 });
 
@@ -20,6 +23,15 @@ frappe.ui.form.on("Delivery Note Item", {
 		get_gita_wh(frm, cdt, cdn);
 	}
 });
+
+function toggleNamingSeries(frm){
+	if(frm.doc.is_return == 1){
+		frm.doc.naming_series = 'SRH.######';
+	} else {
+		frm.doc.naming_series = 'SDH.######';
+	}
+	frm.refresh_field('naming_series');
+}
 
 function get_gita_wh(frm, cdt, cdn){
 	if(frm.doc.is_return == 1){
