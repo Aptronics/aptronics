@@ -1,0 +1,26 @@
+header .navbar {
+  width: 100%;
+  min-height: 50px;
+  border-bottom: 2px solid #ef3123;
+  margin-bottom: 5px;
+}
+
+header .container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 90%;
+}
+
+@media (min-width: 1200px){
+  .container {
+      width: 90% !important;
+      padding-top: 15px !important;
+  }
+  .page-head {
+    top: 60px;
+  }
+}
+
+.modal-backdrop {
+  background-color:  #ef3123;
+}

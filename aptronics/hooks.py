@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from . import __version__ as app_version
 
 app_name = "aptronics"
-app_title = "Aptronics Applications"
+app_title = "Aptronics"
 app_publisher = "Aptronics"
 app_description = "All applications and modules used at Aptronics"
 app_icon = "octicon octicon-file-directory"
@@ -15,8 +15,14 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/aptronics/css/aptronics.css"
-# app_include_js = "/assets/aptronics/js/aptronics.js"
+app_include_css = "/assets/aptronics/css/aptronics.css"
+app_logo_url = '/assets/aptronics/images/Aptronics-lettermark.svg'
+# app_include_js = "/assets/js/aptronics.min.js"
+
+website_context = {
+	"favicon": '/assets/aptronics/images/favicon-96x96.png',
+	"splash_image": "/assets/aptronics/images/Aptronics-Logo.svg"
+}
 
 # include js, css files in header of web template
 # web_include_css = "/assets/aptronics/css/aptronics.css"
@@ -26,10 +32,13 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js"}
+doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
+					"Purchase Order": "public/js/custom/purchase_order_list.js"
+					}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
 
 # Home Pages
 # ----------
@@ -54,8 +63,9 @@ app_license = "MIT"
 # Installation
 # ------------
 
-# before_install = "aptronics.install.before_install"
-# after_install = "aptronics.install.after_install"
+
+# before_install = "aptronics.patches.create_delivery_note_workflow.execute"
+# after_install = "aptronics"
 
 # Desk Notifications
 # ------------------
@@ -80,22 +90,14 @@ app_license = "MIT"
 # Hook on document methods and events
 
 doc_events = {
- 	"Sales Invoice": {
- 		"validate": "aptronics.stock.actual_cost.get_actual_cost_by_batch",
- #		"on_submit": "aptronics.stock.actual_cost.reversal_shipment_not_invoiced",
+	"Sales Order": {
+		"validate": "aptronics.workflows.check_so_backorder_status",
+		"validate":"aptronics.business_rules.validations.sales_order_unique_by_customer"
 	},
-  #"Delivery Note": {
-	#	"on_submit": "aptronics.stock.actual_cost.shipped_not_invoiced",
-	#},
-	#"GL Entry": {
-	#	"before_insert":"aptronics.stock.actual_cost.gl_entry_insert"
-	#},
-	#"Stock Ledger Entry":{
-	#	"before_insert":"aptronics.stock.actual_cost.update_lot"
-	#},
-	#"Batch": {
-	#	"before_insert": "aptronics.stock.actual_cost.update_lot"
-	#}
+	"Purchase Order": {
+		"on_submit": "aptronics.workflows.update_so_with_dropship_po",
+		"on_cancel": "aptronics.workflows.unlink_dropship_po"
+	},
 	"Communication": {
 		"before_insert" : "aptronics.business_rules.email.check_email_address"
 	},
@@ -105,13 +107,9 @@ doc_events = {
 	"Supplier":{
 		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
 	},
-	"Sales Order":{
-		"validate":"aptronics.business_rules.validations.sales_order_unique_by_customer"
-	},
 	"Purchase Invoice":{
 		"validate":"aptronics.business_rules.validations.purchase_invoice_excluding_price_check"
 	}
-
  }
 
 # Scheduled Tasks
@@ -142,8 +140,7 @@ doc_events = {
 
 # Overriding Whitelisted Methods
 # ------------------------------
-#
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "aptronics.event.get_events"
+# 	"erpnext.stock.doctype.delivery_note.make_sales_invoice" : "aptronics.overrides.make_sales_invoice"
+# 	# "frappe.model.workflow.apply_workflow": "aptronics.workflows.apply_workflow"
 # }
-
