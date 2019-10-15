@@ -33,7 +33,9 @@ website_context = {
 
 # include js in doctype views
 doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js",
-			"Sales Invoice": "public/js/custom/sales_invoice_custom.js"}
+			"Sales Invoice": "public/js/custom/sales_invoice_custom.js",
+			"Purchase Invoice": "public/js/custom/purchase_invoice_custom.js",
+			"Purchase Receipt": "public/js/custom/purchase_receipt_custom.js"}
 doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
 					"Purchase Order": "public/js/custom/purchase_order_list.js"
 					}
