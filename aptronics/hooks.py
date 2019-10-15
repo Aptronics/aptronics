@@ -17,7 +17,7 @@ app_license = "MIT"
 # include js, css files in header of desk.html
 app_include_css = "/assets/aptronics/css/aptronics.css"
 app_logo_url = '/assets/aptronics/images/Aptronics-lettermark.svg'
-# app_include_js = "/assets/js/aptronics.min.js"
+app_include_js = "/assets/js/aptronics.min.js"
 
 website_context = {
 	"favicon": '/assets/aptronics/images/favicon-96x96.png',
@@ -35,7 +35,8 @@ website_context = {
 doctype_js = {"Delivery Note": "public/js/custom/delivery_note_custom.js",
 			"Sales Invoice": "public/js/custom/sales_invoice_custom.js",
 			"Purchase Invoice": "public/js/custom/purchase_invoice_custom.js",
-			"Purchase Receipt": "public/js/custom/purchase_receipt_custom.js"}
+			"Purchase Receipt": "public/js/custom/purchase_receipt_custom.js",
+			"Sales Order": "public/js/custom/sales_order_custom.js"}
 doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
 					"Purchase Order": "public/js/custom/purchase_order_list.js"
 					}
@@ -143,7 +144,7 @@ doc_events = {
 
 # Overriding Whitelisted Methods
 # ------------------------------
-# override_whitelisted_methods = {
-# 	"erpnext.stock.doctype.delivery_note.delivery_note.make_sales_invoice":
-# 	"aptronics.overrides.make_aptronics_sales_invoice"
-# }
+override_whitelisted_methods = {
+	"erpnext.selling.doctype.sales_order.sales_order.make_purchase_order":
+	"aptronics.overrides.make_aptronics_purchase_order"
+}
