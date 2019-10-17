@@ -1,2 +1,2 @@
-aptronics.patches.init_custom_stock_settings
-aptronics.patches.create_delivery_note_workflow
+# aptronics.patches.init_custom_stock_settings
+# aptronics.patches.create_delivery_note_workflow
