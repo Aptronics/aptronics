@@ -79,3 +79,15 @@ def update_gita_warehouse_in_si(si, method):
 			gita_warehouse = frappe.get_value("Delivery Note Item", item.dn_detail, 'target_warehouse')
 			item.warehouse = gita_warehouse if gita_warehouse else item.warehouse
 	return si
+
+
+#Cancellation reason API
+@frappe.whitelist()
+def provide_cancellation_reason(doctype, docname, cancellation_reason, user):
+	doc = frappe.get_doc(doctype, docname)
+	cancellation_reason = frappe._("Cancellation Reason: ") + cancellation_reason
+	doc.add_comment(comment_type='Comment', # requires customization to comment doctype
+		text=str(cancellation_reason),
+		link_doctype=doctype,
+		link_name=docname,
+		comment_by=user)
