@@ -1,6 +1,9 @@
+{% include 'aptronics/public/js/aptronics_utils.js' %}
+
 frappe.ui.form.on("Purchase Receipt", {
 	refresh: (frm) => {
 		toggleNamingSeries(frm);
+		buyer_filter(frm);
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);

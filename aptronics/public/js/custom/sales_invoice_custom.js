@@ -1,3 +1,5 @@
+{% include 'aptronics/public/js/aptronics_utils.js' %}
+
 frappe.ui.form.on("Sales Invoice", {
 	refresh: (frm) => {
 		frm.cscript.delivery_note_btn = patchDeliveryNoteBtn(frm);
@@ -5,6 +7,9 @@ frappe.ui.form.on("Sales Invoice", {
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);
+	},
+	before_cancel: (frm) => {
+		provide_cancellation_reason(frm);
 	}
 });
 
