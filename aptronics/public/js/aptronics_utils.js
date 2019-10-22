@@ -4,6 +4,23 @@ function buyer_filter(frm){
 			query: "aptronics.queries.buyer_permissions"
 		};
 	});
+	frappe.ui.form.on(frm.doc.doctype, {
+		buyer: (frm) =>{
+			if(frm.doc.buyer == undefined){
+				frm.doc.buyer_name = "";
+				frm.refresh_field('buyer_name');
+			}
+		}
+	});
+}
+
+function clear_buyer_name(frm){
+	console.log('buyer trigger')
+	if(frm.doc.buyer == undefined){
+		console.log('clear buyername')
+		frm.doc.buyer_name = "";
+		frm.refresh_field('buyer_name');
+	}
 }
 
 function cancellation_reason_dialog(frm) {
