@@ -1,3 +1,5 @@
+{% include 'aptronics/public/js/aptronics_utils.js' %}
+
 frappe.ui.form.on("Delivery Note", {
 	refresh: (frm) => {
 		get_gita_wh(frm);
@@ -13,6 +15,9 @@ frappe.ui.form.on("Delivery Note", {
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);
+	},
+	before_cancel: (frm) => {
+		provide_cancellation_reason(frm);
 	}
 });
 

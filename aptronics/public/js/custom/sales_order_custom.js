@@ -3,6 +3,9 @@
 frappe.ui.form.on("Sales Order", {
 	refresh: (frm) => {
 	 buyer_filter(frm);
+	},
+	before_cancel: (frm) => {
+		provide_cancellation_reason(frm);
 	}
 });
 

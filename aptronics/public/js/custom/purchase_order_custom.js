@@ -8,4 +8,7 @@ frappe.ui.form.on("Purchase Order", {
 	onload_post_render: (frm) => {
 		frm.set_df_property("drop_ship", "hidden", false);
 	},
+	before_cancel: (frm) => {
+		provide_cancellation_reason(frm);
+	}
 });

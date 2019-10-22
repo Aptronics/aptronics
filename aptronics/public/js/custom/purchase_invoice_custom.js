@@ -6,6 +6,9 @@ frappe.ui.form.on("Purchase Invoice", {
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);
+	},
+	before_cancel: (frm) => {
+		provide_cancellation_reason(frm);
 	}
 });
 
