@@ -1,4 +1,6 @@
-function buyer_filter(frm){
+frappe.provide("aptronics");
+
+aptronics.buyer_filter = function (frm){
 	frm.set_query("buyer", () => {
 		return {
 			query: "aptronics.queries.buyer_permissions"
@@ -12,18 +14,18 @@ function buyer_filter(frm){
 			}
 		}
 	});
-}
+};
 
-function clear_buyer_name(frm){
+aptronics.clear_buyer_name = function (frm){
 	console.log('buyer trigger')
 	if(frm.doc.buyer == undefined){
 		console.log('clear buyername')
 		frm.doc.buyer_name = "";
 		frm.refresh_field('buyer_name');
 	}
-}
+};
 
-function cancellation_reason_dialog(frm) {
+aptronics.cancellation_reason_dialog = function (frm) {
 	return new Promise(resolve => {
 		let dialog = new frappe.ui.Dialog({
 			title: __("Please provide a cancellation reason"),
@@ -48,10 +50,10 @@ function cancellation_reason_dialog(frm) {
 		dialog.show();
 		dialog.get_close_btn().hide();
 	});
-}
+};
 
-async function provide_cancellation_reason(frm){
-	let args = await cancellation_reason_dialog(frm);
+aptronics.provide_cancellation_reason = async function(frm){
+	let args = await aptronics.cancellation_reason_dialog(frm);
 	frappe.call({
 		method: 'aptronics.workflows.provide_cancellation_reason',
 		args: args,
@@ -60,4 +62,4 @@ async function provide_cancellation_reason(frm){
 		cur_dialog.hide();
 		frm.reload_doc();
 	});
-}
+};

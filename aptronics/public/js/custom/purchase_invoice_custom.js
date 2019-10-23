@@ -1,14 +1,12 @@
-{% include 'aptronics/public/js/aptronics_utils.js' %}
-
 frappe.ui.form.on("Purchase Invoice", {
 	refresh: (frm) => {
-		buyer_filter(frm);
+		aptronics.buyer_filter(frm);
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);
 	},
 	before_cancel: (frm) => {
-		provide_cancellation_reason(frm);
+		aptronics.provide_cancellation_reason(frm);
 	}
 });
 

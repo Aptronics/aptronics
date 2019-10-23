@@ -1,6 +1,5 @@
 {
   "js/aptronics.min.js": [
-    "public/js/aptronics_utils.js",
-    "public/js/bundling.js"
+    "public/js/aptronics_utils.js"
   ]
 }

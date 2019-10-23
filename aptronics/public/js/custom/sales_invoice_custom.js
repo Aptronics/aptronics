@@ -1,4 +1,4 @@
-{% include 'aptronics/public/js/aptronics_utils.js' %}
+{% include 'aptronics/public/js/bundling.js' %}
 
 frappe.ui.form.on("Sales Invoice", {
 	refresh: (frm) => {
@@ -9,7 +9,7 @@ frappe.ui.form.on("Sales Invoice", {
 		toggleNamingSeries(frm);
 	},
 	before_cancel: (frm) => {
-		provide_cancellation_reason(frm);
+		aptronics.provide_cancellation_reason(frm);
 	}
 });
 

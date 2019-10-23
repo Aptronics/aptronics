@@ -1,12 +1,11 @@
-{% include 'aptronics/public/js/aptronics_utils.js' %}
 {% include 'aptronics/public/js/bundling.js' %}
 
 frappe.ui.form.on("Sales Order", {
 	refresh: (frm) => {
-	 buyer_filter(frm);
+	 aptronics.buyer_filter(frm);
 	},
 	before_cancel: (frm) => {
-		provide_cancellation_reason(frm);
+		aptronics.provide_cancellation_reason(frm);
 	}
 });
 
