@@ -11,6 +11,10 @@ frappe.ui.form.on("Purchase Invoice", {
 });
 
 function toggleNamingSeries(frm){
+	if (frm.doc.docstatus != 0) {
+		return;
+	}
+
 	if(frm.doc.is_return == 1){
 		frm.doc.naming_series = 'PCR.#######';
 	} else {

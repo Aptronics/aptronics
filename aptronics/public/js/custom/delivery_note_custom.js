@@ -31,6 +31,10 @@ frappe.ui.form.on("Delivery Note Item", {
 });
 
 function toggleNamingSeries(frm){
+	if (frm.doc.docstatus != 0) {
+		return;
+	}
+
 	if(frm.doc.is_return == 1){
 		frm.doc.naming_series = 'SRH.#######';
 	} else {
@@ -40,27 +44,24 @@ function toggleNamingSeries(frm){
 }
 
 function get_gita_wh(frm, cdt, cdn){
-	if(frm.doc.is_return == 1){
+	if(frm.doc.docstatus != 0 || frm.doc.is_return == 1){
 		return;
 	}
-	if(cdn == undefined){
-		frm.doc.items.forEach((d) => {
-			frappe.db.get_value("Company", frm.doc.company, 'default_goods_in_transit_warehouse', (r) => {
+
+	frappe.db.get_value("Company", frm.doc.company, 'default_goods_in_transit_warehouse', (r) => {
+		if(!cdn){
+			frm.doc.items.forEach((d) => {
 				if(!d.target_warehouse){
-					frappe.model.set_value("Delivery Note Item", d.name, "target_warehouse",
-						r.default_goods_in_transit_warehouse);
+					frappe.model.set_value(d.doctype, d.name, "target_warehouse", r.default_goods_in_transit_warehouse);
 				}
 			});
-		});
-	} else {
-		let d = locals[cdt][cdn];
-		frappe.db.get_value("Company", frm.doc.company, 'default_goods_in_transit_warehouse', (r) => {
+		} else {
+			let d = locals[cdt][cdn];
 			if(!d.target_warehouse){
-				frappe.model.set_value("Delivery Note Item", d.name, "target_warehouse",
-					r.default_goods_in_transit_warehouse);
+				frappe.model.set_value(d.doctype, d.name, "target_warehouse", r.default_goods_in_transit_warehouse);
 			}
-		});
-	}
+		}
+	});
 }
 
 function make_sales_invoice(frm) {

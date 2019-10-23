@@ -2,7 +2,7 @@
 
 frappe.ui.form.on("Sales Invoice", {
 	refresh: (frm) => {
-		frm.cscript.delivery_note_btn = patchDeliveryNoteBtn(frm);
+		frm.cscript.delivery_note_btn = patchDeliveryNoteBtn;
 		toggleNamingSeries(frm);
 	},
 	is_return: (frm) => {
@@ -20,6 +20,10 @@ frappe.ui.form.on("Sales Invoice Item", {
 });
 
 function toggleNamingSeries(frm){
+	if (frm.doc.docstatus != 0) {
+		return;
+	}
+
 	if(frm.doc.is_return == 1){
 		frm.doc.naming_series = 'SCR.########';
 	} else {
@@ -45,24 +49,24 @@ function get_gita_wh(frm, cdt, cdn){
 }
 
 
-function patchDeliveryNoteBtn(frm) {
-	frm.add_custom_button(__('Delivery Notes'),
+function patchDeliveryNoteBtn() {
+	cur_frm.add_custom_button(__('Delivery Notes'),
 		function() {
 			erpnext.utils.map_current_doc({
 				method: "aptronics.overrides.make_aptronics_sales_invoice",
 				source_doctype: "Delivery Note",
-				target: frm,
+				target: cur_frm,
 				date_field: "posting_date",
 				setters: {
-					customer: frm.doc.customer || undefined
+					customer: cur_frm.doc.customer || undefined
 				},
 				get_query: function() {
 					var filters = {
 						docstatus: 1,
-						company: frm.doc.company,
+						company: cur_frm.doc.company,
 						is_return: 0
 					};
-					if(frm.doc.customer) filters["customer"] = frm.doc.customer;
+					if(cur_frm.doc.customer) filters["customer"] = cur_frm.doc.customer;
 					return {
 						query: "erpnext.controllers.queries.get_delivery_notes_to_be_billed",
 						filters: filters

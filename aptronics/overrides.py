@@ -6,8 +6,9 @@ from erpnext.selling.doctype.sales_order.sales_order import make_purchase_order
 def make_aptronics_sales_invoice(source_name, target_doc=None):
 	si = make_sales_invoice(source_name, target_doc)
 	for item in si.items:
-		warehouse = frappe.get_value('Delivery Note Item', item.dn_detail, 'target_warehouse')
-		item.warehouse = warehouse
+		warehouse = frappe.db.get_value('Delivery Note Item', item.dn_detail, 'target_warehouse')
+		if warehouse:
+			item.warehouse = warehouse
 	return si
 
 
