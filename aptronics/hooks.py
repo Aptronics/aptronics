@@ -97,8 +97,10 @@ doctype_list_js = {"Sales Order": "public/js/custom/sales_order_list.js",
 
 doc_events = {
 	"Sales Order": {
-		"validate": "aptronics.workflows.check_so_backorder_status",
-		"validate":"aptronics.business_rules.validations.sales_order_unique_by_customer"
+		"validate": [
+			"aptronics.workflows.check_so_backorder_status",
+			"aptronics.business_rules.validations.sales_order_unique_by_customer"
+		]
 	},
 	"Purchase Order": {
 		"on_submit": "aptronics.workflows.update_so_with_dropship_po",
