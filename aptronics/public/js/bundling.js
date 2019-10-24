@@ -53,7 +53,7 @@ function add_unbundle_button(){
 function mark_bsbt(){
 	calc_bsbt();
 	render_bsbt();
-	cur_frm.refresh_field('items');
+	return false;
 }
 
 function calc_bsbt(){
@@ -113,7 +113,7 @@ function unbundle(){
 		selected[i].bsbt = undefined;
 		$(wrapper.find('.octicon-package')[0]).remove();
 	}
-	selected = [];
+	return false;
 }
 
 function mark_selected(items, selected){
