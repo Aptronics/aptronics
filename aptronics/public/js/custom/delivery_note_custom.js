@@ -1,5 +1,3 @@
-{% include 'aptronics/public/js/bundling.js' %}
-
 frappe.ui.form.on("Delivery Note", {
 	refresh: (frm) => {
 		get_gita_wh(frm);
