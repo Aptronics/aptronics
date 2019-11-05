@@ -1,6 +1,6 @@
+const start_icon = '<i class="octicon octicon-package" style="color: rgb(152, 216, 91); font-size: 18px; margin-right: 12px;"></i>';
 const cont_icon = '<i class="octicon octicon-package" style="color: rgb(141, 153, 166); font-size: 18px; margin-right: 8px;"></i>';
-const start_icon = '<i class="octicon octicon-package" style="color: rgb(152, 216, 91); font-size: 18px; margin-right: 10px;"></i>';
-const term_icon = '<i class="octicon octicon-package" style="color: rgb(255, 160, 10); font-size: 18px; margin-right: 10px;"></i>';
+const term_icon = '<i class="octicon octicon-package" style="color: rgb(255, 160, 10); font-size: 18px; margin-right: 8px;"></i>';
 
 frappe.ui.form.on(cur_frm.doc.doctype, {
 	refresh: () => {
@@ -11,18 +11,16 @@ frappe.ui.form.on(cur_frm.doc.doctype, {
 });
 
 frappe.ui.form.on(cur_frm.doc.doctype + " Item", {
-	items_move: (frm, cdt, cdn) => {
-		console.log('items_move');
+	items_move: () => {
+		calc_bsbt(get_marked());
+		render_bsbt();
+	},
+	items_add: () => {
 		calc_bsbt();
 		render_bsbt();
 	},
-	items_add: (frm, cdn, cdt) => {
-		add_bundle_button();
-		add_unbundle_button();
-		render_bsbt();
-	},
-	items_remove: (frm, cdt, cdn) => {
-		calc_bsbt();
+	items_remove: () => {
+		calc_bsbt(get_marked());
 		render_bsbt();
 	}
 });
@@ -56,9 +54,23 @@ function mark_bsbt(){
 	return false;
 }
 
-function calc_bsbt(){
+function get_marked(){
+	let marked = [];
 	let items = cur_frm.doc.items;
-	items = mark_selected(items, cur_frm.fields_dict.items.grid.get_selected_children());
+	for(let i=0; i < items.length; i++){
+		if(items[i].bsbt != undefined){
+			marked.push(items[i]);
+		}
+	}
+	return marked;
+}
+
+
+function calc_bsbt(items){
+	if(items == undefined){
+		items = cur_frm.doc.items;
+		items = mark_selected(items, cur_frm.fields_dict.items.grid.get_selected_children());
+	}
 	for(let i=0; i < items.length; i++){
 		if(items[i]._selected == 0){
 			continue;
@@ -113,7 +125,8 @@ function unbundle(){
 		selected[i].bsbt = undefined;
 		$(wrapper.find('.octicon-package')[0]).remove();
 	}
-	return false;
+	calc_bsbt(get_marked());
+	render_bsbt();
 }
 
 function mark_selected(items, selected){
@@ -130,40 +143,3 @@ function mark_selected(items, selected){
 	}
 	return items;
 }
-
-
-// if(selected.length == selected_idx){
-// 	break;
-// } else if(items[i].name != selected[selected_idx].name){
-// 	if(items[i].bsbt && items[i].bsbt == bundle_start){
-// 		selected_idx++;
-// 		continue;
-// 	}
-// 	bundle_start = '';
-// 	items[i].bsbt = 'Bundle Start';
-// 	continue;
-// } else if(bundle_start == ''){
-// 	if(items[i].bsbt){
-// 		selected_idx++;
-// 		continue;
-// 	}
-// 	bundle_start = items[i].idx;
-// 	items[i].bsbt = 'Bundle Start';
-// 	selected_idx++;
-// } else if(selected_idx){
-// 	if(items[i].bsbt){
-// 		selected_idx++;
-// 		continue;
-// 	}
-// 	bundle_start = items[i].idx;
-// 	items[i].bsbt = 'Bundle Start';
-// 	selected_idx++;
-// } else {
-// 	if(items[i].bsbt){
-// 		selected_idx++;
-// 		continue;
-// 	}
-// 	items[i].bsbt = 'Bundle Continue';
-// 	selected_idx++;
-// }
-// }
