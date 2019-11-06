@@ -159,6 +159,30 @@
  ],
  "custom_perms": [],
  "doctype": "Sales Invoice Item",
- "property_setters": [],
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2019-09-25 21:04:39.760285",
+   "default_value": null,
+   "doc_type": "Sales Invoice Item",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "barcode",
+   "idx": 0,
+   "modified": "2019-09-25 21:04:39.760285",
+   "modified_by": "hemant@aptronics.co.za",
+   "name": "Sales Invoice Item-barcode-hidden",
+   "owner": "hemant@aptronics.co.za",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "hidden",
+   "property_type": "Check",
+   "value": "0"
+  }
+ ],
  "sync_on_migrate": 1
 }
