@@ -100,7 +100,8 @@ doc_events = {
 		"validate": [
 			"aptronics.workflows.check_so_backorder_status",
 			"aptronics.business_rules.validations.sales_order_unique_by_customer"
-		]
+		],
+		"before_print": "aptronics.bundling.merge_bundled_items"
 	},
 	"Purchase Order": {
 		"on_submit": "aptronics.workflows.update_so_with_dropship_po",
@@ -109,7 +110,7 @@ doc_events = {
 	"Communication": {
 		"before_insert" : "aptronics.business_rules.email.check_email_address"
 	},
-	"Customer":{
+	"Customer": {
 		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
 	},
 	"Supplier":{
@@ -117,6 +118,12 @@ doc_events = {
 	},
 	"Purchase Invoice":{
 		"validate":"aptronics.business_rules.validations.purchase_invoice_excluding_price_check"
+	},
+	"Quotation ": {
+		"before_print": "aptronics.bundling.merge_bundled_items"
+	},
+	"Sales Invoice": {
+		"before_print": "aptronics.bundling.merge_bundled_items"
 	}
  }
 
