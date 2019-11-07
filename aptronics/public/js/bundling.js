@@ -12,7 +12,8 @@ frappe.ui.form.on(cur_frm.doc.doctype, {
 
 frappe.ui.form.on(cur_frm.doc.doctype + " Item", {
 	items_move: () => {
-		calc_bsbt(get_marked());
+		frappe.msgprint('Moving items may require re-bundling existing bundles.',	'Warning');
+		calc_bsbt(true);
 		render_bsbt();
 	},
 	items_add: () => {
@@ -20,7 +21,7 @@ frappe.ui.form.on(cur_frm.doc.doctype + " Item", {
 		render_bsbt();
 	},
 	items_remove: () => {
-		calc_bsbt(get_marked());
+		calc_bsbt(true);
 		render_bsbt();
 	}
 });
@@ -54,44 +55,6 @@ function mark_bsbt(){
 	return false;
 }
 
-function get_marked(){
-	let marked = [];
-	let items = cur_frm.doc.items;
-	for(let i=0; i < items.length; i++){
-		if(items[i].bsbt != undefined){
-			marked.push(items[i]);
-		}
-	}
-	return marked;
-}
-
-
-function calc_bsbt(items){
-	if(items == undefined){
-		items = cur_frm.doc.items;
-		items = mark_selected(items, cur_frm.fields_dict.items.grid.get_selected_children());
-	}
-	for(let i=0; i < items.length; i++){
-		if(items[i]._selected == 0){
-			continue;
-		} else if(i == 0){ // if i == 0, bundle start
-			items[i].bsbt = 'Bundle Start';
-		} else if(items[i -1]._selected == 0){ // if i -1 is not selected: bundle start
-			items[i].bsbt = 'Bundle Start';
-		}	else {
-			if(i == items.length - 1){
-				items[i].bsbt = 'Bundle Terminate';
-			} else if(items[i + 1]._selected == 0){
-				items[i].bsbt = 'Bundle Terminate';
-			} else if(items[i + 1].bsbt == 'Bundle Start'){
-				items[i].bsbt = 'Bundle Terminate';
-			} else if(items[i - 1]._selected == 1){
-				items[i].bsbt = 'Bundle Continue';
-			}
-		}
-	}
-}
-
 function render_bsbt(){
 	let items = cur_frm.doc.items;
 	for(let i=0; i < items.length; i++){
@@ -123,23 +86,53 @@ function unbundle(){
 		let row_idx = selected[i].idx - 1;
 		let wrapper = $(cur_frm.fields_dict.items.grid.grid_rows[row_idx].wrapper);
 		selected[i].bsbt = undefined;
+		selected[i].__checked = 0;
 		$(wrapper.find('.octicon-package')[0]).remove();
 	}
-	calc_bsbt(get_marked());
+	calc_bsbt(true);
 	render_bsbt();
+	cur_frm.dirty();
 }
 
-function mark_selected(items, selected){
-	let selected_idx = 0;
+function deselect_all(){
+	$(cur_frm.fields_dict.items.grid.wrapper).find('.grid-row-check:checked').prop('checked', '');
+	let items = cur_frm.doc.items;
 	for(let i=0; i < items.length; i++){
-		if(selected_idx == selected.length){
-			items[i]._selected = 0;
-		} else if(items[i].name != selected[selected_idx].name){
-			items[i]._selected = 0;
-		}	else {
-			items[i]._selected = 1;
-			selected_idx++;
+		items[i].__checked = 0;
+	}
+}
+
+
+function calc_bsbt(select_bsbt){
+	let items = cur_frm.doc.items;
+	if(select_bsbt){
+		for(let i=0; i < items.length; i++){
+			items[i].bsbt ? items[i].__checked = 1 : items[i].__checked = 0;
+			console.log(i, items[i].bsbt, items[i].__checked)
 		}
 	}
-	return items;
+	for(let i=0; i < items.length; i++){
+		if(!items[i].__checked)
+			continue;
+		if(i == 0){ // first one
+			items[i].bsbt = 'Bundle Start';
+		} else if(i == items.length - 1){ // last one
+			if(items[i - 1].__checked){
+				items[i].bsbt = 'Bundle Terminate';
+			} else if (!items[i - 1].__checked){
+				items[i].bsbt = 'Bundle Start';
+			}
+		} else if(items[i + 1].bsbt == 'Bundle Start'){ // if the next one is a 'bundle start'
+			items[i].bsbt = 'Bundle Terminate';
+		} else if(!items[i - 1].__checked && items[i + 1].__checked){
+			items[i].bsbt = 'Bundle Start';
+		} else if(items[i - 1].__checked && !items[i + 1].__checked){
+			items[i].bsbt = 'Bundle Terminate';
+		} else if(items[i - 1].__checked && items[i + 1].__checked){
+			items[i].bsbt = 'Bundle Continue';
+		}
+	}
+	cur_frm.dirty();
+	deselect_all();
+	return false;
 }
