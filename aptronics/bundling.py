@@ -67,3 +67,5 @@ def merge_bundled_items(self, method):
 
 	for item in to_remove:
 		self.remove(item)
+
+	self.total_qty = sum([d.qty for d in self.items])
