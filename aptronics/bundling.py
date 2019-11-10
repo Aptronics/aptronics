@@ -6,10 +6,12 @@ def merge_bundled_items(self, method):
 	item_meta = frappe.get_meta(self.doctype + " Item")
 	count = 0
 
-	sum_fields = ['qty', 'stock_qty', 'total_weight', 'amount', 'net_amount']
+	copy_fields = ['qty', 'stock_qty']
+	sum_fields = ['total_weight', 'amount', 'net_amount']
 	rate_fields = [('rate', 'amount'), ('net_rate', 'net_amount'), ('weight_per_unit', 'total_weight')]
 
 	base_fields = [('base_' + f, f) for f in sum_fields if item_meta.has_field('base_' + f)]
+	base_fields += [('base_' + f, f) for f in copy_fields if item_meta.has_field('base_' + f)]
 	base_fields += [('base_' + t, t) for t, s in rate_fields if item_meta.has_field('base_' + t)]
 
 	# Sum amounts
@@ -19,7 +21,10 @@ def merge_bundled_items(self, method):
 			in_bundle = item.idx
 
 		if not in_bundle or item.bsbt == 'Bundle Start':
-			bundles[item.idx] = frappe._dict()
+			new_bundle = frappe._dict()
+			for f in copy_fields:
+				new_bundle[f] = item.get(f)
+			bundles[item.idx] = new_bundle
 
 		group_item = bundles[in_bundle or item.idx]
 
