@@ -17,9 +17,7 @@ aptronics.buyer_filter = function (frm){
 };
 
 aptronics.clear_buyer_name = function (frm){
-	console.log('buyer trigger')
 	if(frm.doc.buyer == undefined){
-		console.log('clear buyername')
 		frm.doc.buyer_name = "";
 		frm.refresh_field('buyer_name');
 	}
