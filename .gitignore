@@ -4,3 +4,4 @@
 *.swp
 tags
 aptronics/docs/current
+__pycache__/
