@@ -109,16 +109,16 @@ doc_events = {
 		"on_cancel": "aptronics.workflows.unlink_dropship_po"
 	},
 	"Communication": {
-		"before_insert" : "aptronics.business_rules.email.check_email_address"
+		"before_insert": "aptronics.business_rules.email.check_email_address"
 	},
 	"Customer": {
-		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
+		"before_insert": "aptronics.business_rules.naming_series.business_partner_naming_series"
 	},
-	"Supplier":{
-		"before_insert":"aptronics.business_rules.naming_series.business_partner_naming_series"
+	"Supplier": {
+		"before_insert": "aptronics.business_rules.naming_series.business_partner_naming_series"
 	},
-	"Purchase Invoice":{
-		"validate":"aptronics.business_rules.validations.purchase_invoice_excluding_price_check"
+	"Purchase Invoice": {
+		"validate": "aptronics.business_rules.validations.purchase_invoice_excluding_price_check"
 	},
 	"Quotation ": {
 		"before_print": "aptronics.bundling.merge_bundled_items"
@@ -126,7 +126,7 @@ doc_events = {
 	"Sales Invoice": {
 		"before_print": "aptronics.bundling.merge_bundled_items"
 	}
- }
+}
 
 # Scheduled Tasks
 # ---------------
