@@ -17,5 +17,5 @@ def sales_order_unique_by_customer(doc,method):
                                                                                                           doc.po_no))
 
 def purchase_invoice_excluding_price_check(doc,method):
-    if doc.validate_excluding_invoice_total <= doc.total:
+    if round(doc.validate_excluding_invoice_total,2) <= round(doc.total,2):
         frappe.throw(_("Please check Totals."))
