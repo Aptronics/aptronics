@@ -158,5 +158,7 @@ doc_events = {
 # ------------------------------
 override_whitelisted_methods = {
 	"erpnext.selling.doctype.sales_order.sales_order.make_purchase_order":
-	"aptronics.overrides.make_aptronics_purchase_order"
+	"aptronics.overrides.make_aptronics_purchase_order",
+	"erpnext.selling.doctype.delivery_note.delivery_note.make_sales_invoice":
+	"aptronics.overrides.make_aptronics_sales_invoice"
 }
