@@ -43,7 +43,7 @@ aptronics.cancellation_reason_dialog = function (frm) {
 					user: frappe.session.user
 				});
 			},
-			primary_action_label: __('Cancel')
+			primary_action_label: __('Submit')
 		});
 		dialog.show();
 		dialog.get_close_btn().hide();
