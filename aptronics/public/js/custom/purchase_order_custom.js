@@ -3,6 +3,9 @@ frappe.ui.form.on("Purchase Order", {
 		frm.set_df_property("drop_ship", "hidden", 0);
 		aptronics.buyer_filter(frm);
 	},
+	submit: (frm) => {
+		frm.set_df_property("drop_ship", "hidden", 0);
+	},
 	onload_post_render: (frm) => {
 		frm.set_df_property("drop_ship", "hidden", 0);
 	},
