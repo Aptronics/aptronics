@@ -2,6 +2,7 @@ frappe.ui.form.on("Delivery Note", {
 	refresh: (frm) => {
 		get_gita_wh(frm);
 		toggleNamingSeries(frm);
+		aptronics.disallow_attachment_delete(frm)
 	},
 	onload_post_render: (frm) => {
 		get_gita_wh(frm);

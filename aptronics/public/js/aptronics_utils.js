@@ -61,3 +61,9 @@ aptronics.provide_cancellation_reason = async function(frm){
 		frm.reload_doc();
 	});
 };
+
+aptronics.disallow_attachment_delete = function(frm){
+	if(frm.doc.docstatus == 1){
+		frm.$wrapper.find('.attachment-row').find('.close').hide()
+	}
+}
