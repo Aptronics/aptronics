@@ -2,6 +2,7 @@ frappe.ui.form.on("Purchase Receipt", {
 	refresh: (frm) => {
 		toggleNamingSeries(frm);
 		aptronics.buyer_filter(frm);
+		aptronics.disallow_attachment_delete(frm)
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);

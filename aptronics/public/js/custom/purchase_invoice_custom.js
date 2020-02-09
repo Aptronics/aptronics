@@ -1,6 +1,7 @@
 frappe.ui.form.on("Purchase Invoice", {
 	refresh: (frm) => {
 		aptronics.buyer_filter(frm);
+		aptronics.disallow_attachment_delete(frm);
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);
