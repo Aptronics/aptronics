@@ -125,6 +125,9 @@ doc_events = {
 	},
 	"Sales Invoice": {
 		"before_print": "aptronics.bundling.merge_bundled_items"
+	},
+	"File": {
+		"on_trash": "aptronics.files.confirm_delete_of_submitted_doc"
 	}
 }
 

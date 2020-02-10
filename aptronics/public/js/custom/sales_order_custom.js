@@ -4,6 +4,7 @@ frappe.ui.form.on("Sales Order", {
 	refresh: (frm) => {
 	 aptronics.buyer_filter(frm);
 	 set_default_delivery_date(frm);
+	 aptronics.disallow_attachment_delete(frm)
 	},
 	before_cancel: (frm) => {
 		aptronics.provide_cancellation_reason(frm);

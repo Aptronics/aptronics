@@ -6,7 +6,7 @@ frappe.ui.form.on("Sales Invoice", {
 	refresh: (frm) => {
 		frm.cscript.delivery_note_btn = patchDeliveryNoteBtn;
 		toggleNamingSeries(frm);
-		// confirm_non_git_items(frm);
+		aptronics.disallow_attachment_delete(frm)
 	},
 	is_return: (frm) => {
 		toggleNamingSeries(frm);

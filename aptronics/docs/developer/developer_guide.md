@@ -120,7 +120,7 @@ The Frappe community uses [conventional commits](https://www.conventionalcommits
   * perf
   * docs
 
-It neither uncommon nor required to add the _thing_ that is being changed into the prefix:
+Optionally, add the _thing_ that is being changed into the prefix:
 `feat(reports): add Gross Margin by Department report`
 
 Best practices dictate that changes should be relatively atomic, so it often makes sense to add one file at a time.
