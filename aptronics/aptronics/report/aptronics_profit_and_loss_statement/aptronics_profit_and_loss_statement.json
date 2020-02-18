@@ -1,0 +1,405 @@
+{
+ "add_total_row": 0,
+ "creation": "2020-02-11 15:08:27.612996",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2020-02-18 21:40:43.026591",
+ "modified_by": "Administrator",
+ "module": "Aptronics",
+ "name": "Aptronics Profit and Loss Statement",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "GL Entry",
+ "report_name": "Aptronics Profit and Loss Statement",
+ "report_rows": [
+  {
+   "formula": "data[0].current_period = sum([row.current_period for row in data[1:7]])\ndata[0].year_to_date = sum([row.year_to_date for row in data[1:7]])",
+   "row_label": "Revenue",
+   "subtotal": 1
+  },
+  {
+   "account": "011101 - Hardware Sales - APT",
+   "row_label": "Hardware Sales",
+   "subtotal": 0
+  },
+  {
+   "account": "011201 - Software Sales - APT",
+   "row_label": "Software Sales",
+   "subtotal": 0
+  },
+  {
+   "account": "011301 - Product Services Sales - APT",
+   "row_label": "Product Services Sales",
+   "subtotal": 0
+  },
+  {
+   "account": "012101 - Manage services Sales - APT",
+   "row_label": "Manage services Sales",
+   "subtotal": 0
+  },
+  {
+   "account": "013101 - Sub Contractors Sales - APT",
+   "row_label": "Sub Contractors Sales",
+   "subtotal": 0
+  },
+  {
+   "account": "013108 - Sales Accrual - APT",
+   "row_label": "Sales Accrual",
+   "subtotal": 0
+  },
+  {
+   "account": "014101 - Annuity Sales - APT",
+   "row_label": "Annuity Sales",
+   "subtotal": 0
+  },
+  {
+   "formula": "data[8].current_period = sum([row.current_period for row in data[9:19]])\ndata[8].year_to_date = sum([row.year_to_date for row in data[9:19]])",
+   "row_label": "Cost Of Sales",
+   "subtotal": 1
+  },
+  {
+   "account": "013501 - Rebates - APT",
+   "row_label": "Rebates",
+   "subtotal": 0
+  },
+  {
+   "account": "021101 - Hardware - APT",
+   "row_label": "Hardware",
+   "subtotal": 0
+  },
+  {
+   "account": "021301 - Product Service - APT",
+   "row_label": "Product Service",
+   "subtotal": 0
+  },
+  {
+   "account": "021407 - Purchase Variance - APT",
+   "row_label": "Purchase Variance",
+   "subtotal": 0
+  },
+  {
+   "account": "022101 - Services Depart Payroll Cost - APT",
+   "row_label": "Services Depart Payroll Cost",
+   "subtotal": 0
+  },
+  {
+   "account": "023101 - Sub Contractors - APT",
+   "row_label": "Sub Contractors",
+   "subtotal": 0
+  },
+  {
+   "account": "023102 - Travel & Subsistence Cost - APT",
+   "row_label": "Travel & Subsistence Cost",
+   "subtotal": 0
+  },
+  {
+   "account": "023103 - Training Cost - APT",
+   "row_label": "Training Cost",
+   "subtotal": 0
+  },
+  {
+   "account": "024101 - Annuity Cost - APT",
+   "row_label": "Annuity Cost",
+   "subtotal": 0
+  },
+  {
+   "account": "031402 - Commission VM  Ware - APT",
+   "row_label": "Commission VM  Ware",
+   "subtotal": 0
+  },
+  {
+   "account": "031403 - Commission Citrix & Microsoft - APT",
+   "row_label": "Commission Citrix & Microsoft",
+   "subtotal": 0
+  },
+  {
+   "formula": "data[20].current_period = data[0].current_period - data[8].current_period\ndata[20].year_to_date = data[0].year_to_date - data[8].year_to_date",
+   "row_label": "Gross Profit",
+   "subtotal": 1
+  },
+  {
+   "formula": "data[21].current_period = sum([row.current_period for row in data[22:22]])\ndata[21].year_to_date = sum([row.year_to_date for row in data[22:22]])",
+   "row_label": "Interest",
+   "subtotal": 1
+  },
+  {
+   "account": "031101 - Interest received - APT",
+   "row_label": "Interest received",
+   "subtotal": 0
+  },
+  {
+   "formula": "data[23].current_period = sum([row.current_period for row in data[24:29]])\ndata[23].year_to_date = sum([row.year_to_date for row in data[24:29]])",
+   "row_label": "Other Income",
+   "subtotal": 1
+  },
+  {
+   "account": "031301 - Discount received for cash - APT",
+   "row_label": "Discount received for cash",
+   "subtotal": 0
+  },
+  {
+   "account": "Profit or loss on Foreign currency - APT",
+   "row_label": "Profit or loss on Foreign currency",
+   "subtotal": 0
+  },
+  {
+   "account": "031801 - Other Income - Sales - APT",
+   "row_label": "Other Income - Sales",
+   "subtotal": 0
+  },
+  {
+   "account": "031802 - Other Income - Cost - APT",
+   "row_label": "Other Income - Cost",
+   "subtotal": 0
+  },
+  {
+   "account": "031803 - Other Income - Admin Fee - APT",
+   "row_label": "Other Income - Admin Fee",
+   "subtotal": 0
+  },
+  {
+   "account": "031901 - MDF Rebates - APT",
+   "row_label": "MDF Rebates",
+   "subtotal": 0
+  },
+  {
+   "row_label": "Total Income",
+   "subtotal": 1
+  },
+  {
+   "formula": "data[31].current_period = sum([row.current_period for row in data[32:72]])\ndata[31].year_to_date = sum([row.year_to_date for row in data[32:72]])",
+   "row_label": "Expenses",
+   "subtotal": 1
+  },
+  {
+   "account": "041101 - Salary costs - APT",
+   "row_label": "Salary costs",
+   "subtotal": 0
+  },
+  {
+   "account": "041102 - Commisions - APT",
+   "formula": "",
+   "row_label": "Commisions",
+   "subtotal": 0
+  },
+  {
+   "account": "041103 - Medical aid - APT",
+   "row_label": "Medical aid",
+   "subtotal": 0
+  },
+  {
+   "account": "041104 - UIF Co Contributions - APT",
+   "row_label": "UIF Co Contributions",
+   "subtotal": 0
+  },
+  {
+   "account": "041105 - Group life Risk contributions - APT",
+   "row_label": "Group life Risk contributions",
+   "subtotal": 0
+  },
+  {
+   "account": "041106 - Skills development levy - APT",
+   "row_label": "Skills development levy",
+   "subtotal": 0
+  },
+  {
+   "account": "041107 - Leave Provision - APT",
+   "row_label": "Leave Provision",
+   "subtotal": 0
+  },
+  {
+   "account": "113007 - Bonus Accrual - APT",
+   "row_label": "Bonus Accrual",
+   "subtotal": 0
+  },
+  {
+   "account": "041110 - Commission Provision - APT",
+   "row_label": "Commission Provision",
+   "subtotal": 0
+  },
+  {
+   "account": "041111 - Income Protection Policy Recov - APT",
+   "row_label": "Income Protection Policy Recov",
+   "subtotal": 0
+  },
+  {
+   "account": "041112 - Employment Tax Incentive - APT",
+   "row_label": "Employment Tax Incentive",
+   "subtotal": 0
+  },
+  {
+   "account": "041113 - Pension Fund - APT",
+   "row_label": "Pension Fund",
+   "subtotal": 0
+  },
+  {
+   "account": "041114 - Profitshare Provision - APT",
+   "row_label": "Profitshare Provision",
+   "subtotal": 0
+  },
+  {
+   "account": "0420103 - Advertising & Promotions - APT",
+   "row_label": "Advertising & Promotions",
+   "subtotal": 0
+  },
+  {
+   "account": "0420104 - Amortisation of Intangible Assets - APT",
+   "row_label": "Amortisation of Intangible Assets",
+   "subtotal": 0
+  },
+  {
+   "account": "0420202 - Bank charges - APT",
+   "row_label": "Bank charges",
+   "subtotal": 0
+  },
+  {
+   "account": "0420301 - Computer expenses - APT",
+   "row_label": "Computer expenses",
+   "subtotal": 0
+  },
+  {
+   "account": "0420302 - Conference expenses - APT",
+   "row_label": "Conference expenses",
+   "subtotal": 0
+  },
+  {
+   "account": "0420303 - Courier expenses - APT",
+   "row_label": "Courier expenses",
+   "subtotal": 0
+  },
+  {
+   "account": "0420304 - Consulting  fees - APT",
+   "row_label": "Consulting  fees",
+   "subtotal": 0
+  },
+  {
+   "account": "0420306 - Cleaning  fees - APT",
+   "row_label": "Cleaning  fees",
+   "subtotal": 0
+  },
+  {
+   "account": "0420307 - Corporate Overhead Allocation - APT",
+   "row_label": "Corporate Overhead Allocation",
+   "subtotal": 0
+  },
+  {
+   "account": "0420401 - Data lines & Internet connection - APT",
+   "row_label": "Data lines & Internet connection",
+   "subtotal": 0
+  },
+  {
+   "account": "0420402 - Donations - APT",
+   "row_label": "Donations",
+   "subtotal": 0
+  },
+  {
+   "account": "0420404 - Depreciation - APT",
+   "row_label": "Depreciation",
+   "subtotal": 0
+  },
+  {
+   "account": "0420501 - Entertainement expenses - APT",
+   "row_label": "Entertainement expenses",
+   "subtotal": 0
+  },
+  {
+   "account": "0420901 - Insurance - APT",
+   "row_label": "Insurance",
+   "subtotal": 0
+  },
+  {
+   "account": "0420902 - Interest paid - APT",
+   "row_label": "Interest paid",
+   "subtotal": 0
+  },
+  {
+   "account": "0421301 - Motor vehicle expenses - APT",
+   "row_label": "Motor vehicle expenses",
+   "subtotal": 0
+  },
+  {
+   "account": "0421502 - Operational Overhead Allocation - APT",
+   "row_label": "Operational Overhead Allocation",
+   "subtotal": 0
+  },
+  {
+   "account": "0421601 - Printing & Stationery - APT",
+   "row_label": "Printing & Stationery",
+   "subtotal": 0
+  },
+  {
+   "account": "0421801 - Recruitment costs - APT",
+   "row_label": "Recruitment costs",
+   "subtotal": 0
+  },
+  {
+   "account": "0421803 - Rent & Allied charges - APT",
+   "row_label": "Rent & Allied charges",
+   "subtotal": 0
+  },
+  {
+   "account": "0421804 - Repairs & Maintenance - APT",
+   "row_label": "Repairs & Maintenance",
+   "subtotal": 0
+  },
+  {
+   "account": "0421901 - Security expenses - APT",
+   "row_label": "Security expenses",
+   "subtotal": 0
+  },
+  {
+   "account": "0421902 - Subscriptions - APT",
+   "row_label": "Subscriptions",
+   "subtotal": 0
+  },
+  {
+   "account": "0421903 - Staff Welfare & Refreshments - APT",
+   "row_label": "Staff Welfare & Refreshments",
+   "subtotal": 0
+  },
+  {
+   "account": "0422001 - Telephone & Cellphone costs - APT",
+   "row_label": "Telephone & Cellphone costs",
+   "subtotal": 0
+  },
+  {
+   "account": "0422002 - Training - APT",
+   "row_label": "Training",
+   "subtotal": 0
+  },
+  {
+   "account": "0422003 - Travel & Accomodation - local - APT",
+   "row_label": "Travel & Accomodation - local",
+   "subtotal": 0
+  },
+  {
+   "account": "0422004 - Travel & Accomodation - foreign - APT",
+   "row_label": "Travel & Accomodation - foreign",
+   "subtotal": 0
+  },
+  {
+   "row_label": "Net Profit/Loss Before Tax",
+   "subtotal": 1
+  },
+  {
+   "row_label": "Net Profit/Loss",
+   "subtotal": 1
+  }
+ ],
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Auditor"
+  }
+ ]
+}
