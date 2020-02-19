@@ -90,8 +90,12 @@ function confirm_non_git_items(frm){
 		let git_wh = r.default_goods_in_transit_warehouse;
 		frm.doc.items.forEach((row) => {
 			if(row.warehouse != git_wh){
-				let s = "Row " + row.idx + ": (" + row.qty + ") " + row.item_code + " <b>" + row.warehouse + "</b><br>";
-				non_git_rows += s;
+				frappe.db.get_value("Item", row.item_code, 'is_stock_item', (r) => {
+					if(r.message.maintain_stock == 1){
+						let s = "Row " + row.idx + ": (" + row.qty + ") " + row.item_code + " <b>" + row.warehouse + "</b><br>";
+						non_git_rows += s;
+					}
+				})
 			}
 		})
 		if(non_git_rows.length > 0){
