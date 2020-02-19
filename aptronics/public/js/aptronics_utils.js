@@ -67,20 +67,3 @@ aptronics.disallow_attachment_delete = function(frm){
 		frm.$wrapper.find('.attachment-row').find('.close').hide()
 	}
 }
-
-aptronics.get_radical_iref = function(frm){
-	let docflow = {
-		'Sales Order': 'Quotation',
-		'Delivery Note': 'Sales Order',
-		'Sales Invoice': 'Delivery Note',
-		'Purchase Order': 'Sales Order',
-		'Purchase Receipt': 'Purchase Order',
-		'Purchase Invoice': 'Purchase Receipt'
-	}
-	if(frm.doc.radical_iref)
-		return
-
-	frappe.db.get_value(docflow[frm.doc.doctype], "!!!!docname", "radical_iref", r  => {
-			frm.doc.radical_iref = r.radical_iref
-		})
-}
