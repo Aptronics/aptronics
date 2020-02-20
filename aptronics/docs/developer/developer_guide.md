@@ -11,17 +11,17 @@ Install Frappe and ERPNext according to one of these guides:
 
 Start a **new bench** where we will install the Aptonics forks of Frappe and ERPNext and the Aptronics app
 ```bash
-bench init --python python3 aptronics-dev
+bench init --python python3 aptronics-dev --frappe-path https://github.com/Aptronics/frappe.git --frappe-branch aptronics
 ```
 Change the repo and switch the branch
 ```bash
 cd aptronics-dev/apps/frappe &&
-git remote set-url upstream https://github.com/Aptronics/frappe &&
 cd ~/aptronics-dev &&
 bench switch-to-branch aptronics
 ```
 Create a new site
 ```bash
+cd aptronics-dev &&
 bench new-site aptronics.local --db-name aptronicsdev
 ```
 Install ERPNext from the Aptronics fork
