@@ -16,12 +16,12 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 app_include_css = "/assets/aptronics/css/aptronics.css"
-app_logo_url = '/assets/aptronics/images/Aptronics-lettermark.svg'
+app_logo_url = '/assets/aptronics/images/eoh_logo.png'
 app_include_js = "/assets/js/aptronics.min.js"
 
 website_context = {
-	"favicon": '/assets/aptronics/images/favicon-96x96.png',
-	"splash_image": "/assets/aptronics/images/Aptronics-Logo.svg"
+	"favicon": '/assets/aptronics/images/favicon.png',
+	"splash_image": "/assets/aptronics/images/eoh_wordmark.png"
 }
 
 # include js, css files in header of web template
