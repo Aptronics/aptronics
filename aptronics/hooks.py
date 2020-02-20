@@ -105,6 +105,7 @@ doc_events = {
 		"before_print": "aptronics.bundling.merge_bundled_items"
 	},
 	"Purchase Order": {
+		"before_insert": "aptronics.workflows.reset_doc_title_if_amended",
 		"on_submit": "aptronics.workflows.update_so_with_dropship_po",
 		"on_cancel": "aptronics.workflows.unlink_dropship_po"
 	},
