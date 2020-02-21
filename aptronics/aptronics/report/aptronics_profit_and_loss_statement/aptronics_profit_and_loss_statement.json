@@ -7,7 +7,7 @@
  "doctype": "Report",
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2020-02-18 21:40:43.026591",
+ "modified": "2020-02-21 19:41:33.535199",
  "modified_by": "Administrator",
  "module": "Aptronics",
  "name": "Aptronics Profit and Loss Statement",
@@ -382,10 +382,22 @@
    "subtotal": 0
   },
   {
+   "formula": "data[73].current_period = data[30].current_period - data[31].current_period\ndata[73].year_to_date = data[30].year_to_date - data[31].year_to_date",
    "row_label": "Net Profit/Loss Before Tax",
    "subtotal": 1
   },
   {
+   "account": "051001 - Company Taxation - APT",
+   "row_label": "Company Taxation",
+   "subtotal": 0
+  },
+  {
+   "account": "051003 - Deffered Tax - APT",
+   "row_label": "Deffered Tax",
+   "subtotal": 0
+  },
+  {
+   "formula": "data[76].current_period = data[73].current_period - sum([row.current_period for row in data[74:75]])\ndata[76].year_to_date = data[73].year_to_date - sum([row.year_to_date for row in data[74:75]])\n",
    "row_label": "Net Profit/Loss",
    "subtotal": 1
   }
