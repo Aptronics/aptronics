@@ -114,3 +114,10 @@ function confirm_non_git_items(frm){
 		}
 	})
 }
+
+function make_return_invoice(frm) {
+	frappe.model.open_mapped_doc({
+		method: "aptronics.overrides.make_aptronics_return_sales_invoice",
+		frm: frm
+	});
+}
