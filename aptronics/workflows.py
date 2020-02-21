@@ -91,3 +91,9 @@ def provide_cancellation_reason(doctype, docname, cancellation_reason, user):
 		link_doctype=doctype,
 		link_name=docname,
 		comment_by=user)
+
+
+@frappe.whitelist()
+def reset_doc_title_if_amended(doc, method):
+	doc.title = "" if doc.amended_from else doc.title
+	return doc
