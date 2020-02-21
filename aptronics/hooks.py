@@ -16,7 +16,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 app_include_css = "/assets/aptronics/css/aptronics.css"
-app_logo_url = '/assets/aptronics/images/eoh_logo.png'
+app_logo_url = '/assets/aptronics/images/eoh_lettermark.png'
 app_include_js = "/assets/js/aptronics.min.js"
 
 website_context = {
